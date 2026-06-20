@@ -30,11 +30,11 @@ extension SpellLevels on SpellLevel {
 
 
 class Spell {
-  final String name;
+  String name;
   final SpellLevel level;
-  final String description;
+  String description;
 
-  const Spell({
+  Spell({
     required this.level,
     this.name = "",
     this.description = "",
@@ -49,10 +49,12 @@ class SpellLine extends StatefulWidget {
     super.key,
     this.prepared = false,
     required this.spell,
+    required this.spellSaved,
   });
 
   final bool prepared;
   final Spell spell;
+  final void Function(Spell) spellSaved;
 
   @override
   State<SpellLine> createState() => _SpellLineState();
@@ -91,7 +93,13 @@ class _SpellLineState extends State<SpellLine> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    content: SpellBox(spell: widget.spell)
+                    content: SpellBox(
+                      spell: widget.spell,
+                      spellSaved: (spell) {
+                        widget.spellSaved(spell);
+                        Navigator.pop(context);
+                      }
+                    )
                   );
                 }
               );
@@ -201,7 +209,17 @@ class _SpellSectionState extends State<SpellSection> {
           )
         ),
         Column(
-          children: spells.map((spell) => SpellLine(spell: spell)).toList()
+          children: List.generate(
+            spells.length,
+            (index) => SpellLine(
+              spell: spells[index],
+              spellSaved: (updatedSpell) {
+                setState(() {
+                  spells[index] = updatedSpell;
+                });
+              },
+            ),
+          )
         )
       ],
     );
@@ -216,8 +234,10 @@ class SpellBox extends StatefulWidget {
   const SpellBox({
     super.key,
     required this.spell,
+    required this.spellSaved,
   });
 
+  final void Function(Spell) spellSaved;
   final Spell spell;
 
   @override
@@ -227,10 +247,22 @@ class SpellBox extends StatefulWidget {
 class _SpellBoxState extends State<SpellBox> {
   late Spell spell;
 
+  final nameController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  void _saveSpell() {
+    setState(() {
+      spell.name = nameController.text;
+      spell.description = descriptionController.text;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     spell = widget.spell;
+    nameController.text = spell.name;
+    descriptionController.text = spell.description;
   }
 
   @override
@@ -250,6 +282,7 @@ class _SpellBoxState extends State<SpellBox> {
                 child: Column(
                   children: [
                     TextField(
+                      controller: nameController,
                       textAlign: .center,
                       decoration: const InputDecoration(
                         isDense: true,
@@ -262,6 +295,7 @@ class _SpellBoxState extends State<SpellBox> {
                 ),
               ),
               TextField(
+                controller: descriptionController,
                 maxLines: null,
                 decoration: const InputDecoration(
                   isDense: true,
@@ -270,6 +304,13 @@ class _SpellBoxState extends State<SpellBox> {
                 ),
               ),
               Text("SPELL DESCRIPTION", style: TextStyle(fontSize: 8)),
+              TextButton(
+                child: Text("SAVE SPELL"),
+                onPressed: () {
+                  _saveSpell();
+                  widget.spellSaved(spell);
+                }
+              )
             ],
           ),
         )
