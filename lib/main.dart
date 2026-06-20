@@ -192,8 +192,10 @@ class MainApp extends StatelessWidget {
                                 SavesBox(),
                                 CardSection(
                                   child: Column(
+                                    spacing: 10,
                                     children: [
                                       Row(
+                                        spacing: 5,
                                         children: [
                                           Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center)),
                                           Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center)),
@@ -202,7 +204,7 @@ class MainApp extends StatelessWidget {
                                           Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center)),
                                         ]
                                       ),
-                                      ValueBox(label: "EQUIPMENT", position: .bottom, multiline: true)
+                                      LabeledField(label: "EQUIPMENT", position: .bottom, multiline: true)
                                     ],
                                   )
                                 )
