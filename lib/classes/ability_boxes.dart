@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class SkillLine extends StatefulWidget {
+  const SkillLine({
+    super.key,
+    required this.value,
+    this.pressed = false,
+  });
+
+  final String value;
+  final bool pressed;
+
+  @override
+  State<SkillLine> createState() => _SkillLineState();
+}
+
+class _SkillLineState extends State<SkillLine> {
+  late bool pressed;
+
+  @override
+  void initState() {
+    super.initState();
+    pressed = widget.pressed;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 30,
+          height: 30,
+          child: IconButton(
+            iconSize: 15,
+            icon: Icon(pressed ? Icons.circle : Icons.circle_outlined),
+            onPressed: () {
+              setState(() {
+                pressed = !pressed;
+              });
+            },
+          ),
+        ),
+        SizedBox(
+          width: 25,
+          child: TextField(
+            textAlign: .center,
+            style: TextStyle(fontSize: 12),
+            decoration: const InputDecoration(
+              isDense: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 1),
+            ),
+          )
+        ),
+        Text(
+          widget.value,
+          style: TextStyle(fontSize: 12)
+        )
+      ]
+    );
+  }
+}
+
+
+
+class AbilityBox extends StatelessWidget {
+  const AbilityBox({
+    super.key,
+    required this.value
+  });
+
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+        child: Column(
+          children: [
+            Text(
+              value,
+              textAlign: .center,
+              style: TextStyle(fontSize: 12)
+            ),
+            SizedBox(
+              width: 50,
+              child: TextField(
+                textAlign: .center,
+                textAlignVertical: .center,
+                inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                decoration: const InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 1),
+                  border: OutlineInputBorder()
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 27,
+              height: 27,
+              child: TextField(
+                textAlign: .center,
+                textAlignVertical: .center,
+                style: TextStyle(fontSize: 12),
+                decoration: const InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 7, horizontal: 1),
+                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
