@@ -30,14 +30,16 @@ extension SpellLevels on SpellLevel {
 
 
 class Spell {
-  String name;
   final SpellLevel level;
+  String name;
   String description;
+  bool prepared;
 
   Spell({
     required this.level,
     this.name = "",
     this.description = "",
+    this.prepared = false,
   });
 }
 
@@ -47,12 +49,10 @@ class Spell {
 class SpellLine extends StatefulWidget {
   const SpellLine({
     super.key,
-    this.prepared = false,
     required this.spell,
     required this.spellSaved,
   });
 
-  final bool prepared;
   final Spell spell;
   final void Function(Spell) spellSaved;
 
@@ -61,12 +61,10 @@ class SpellLine extends StatefulWidget {
 }
 
 class _SpellLineState extends State<SpellLine> {
-  late bool prepared;
 
   @override
   void initState() {
     super.initState();
-    prepared = widget.prepared;
   }
 
   @override
@@ -78,10 +76,10 @@ class _SpellLineState extends State<SpellLine> {
           height: 30,
           child: IconButton(
             iconSize: 15,
-            icon: Icon(prepared ? Icons.circle : Icons.circle_outlined),
+            icon: Icon(widget.spell.prepared ? Icons.circle : Icons.circle_outlined),
             onPressed: () {
               setState(() {
-                prepared = !prepared;
+                widget.spell.prepared = !widget.spell.prepared;
               });
             },
           ),
@@ -97,7 +95,6 @@ class _SpellLineState extends State<SpellLine> {
                       spell: widget.spell,
                       spellSaved: (spell) {
                         widget.spellSaved(spell);
-                        Navigator.pop(context);
                       }
                     )
                   );
@@ -310,7 +307,7 @@ class _SpellBoxState extends State<SpellBox> {
                   _saveSpell();
                   widget.spellSaved(spell);
                 }
-              )
+              ),
             ],
           ),
         )
