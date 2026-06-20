@@ -51,10 +51,12 @@ class SpellLine extends StatefulWidget {
     super.key,
     required this.spell,
     required this.spellSaved,
+    required this.deleteSpell,
   });
 
   final Spell spell;
   final void Function(Spell) spellSaved;
+  final void Function() deleteSpell;
 
   @override
   State<SpellLine> createState() => _SpellLineState();
@@ -95,6 +97,11 @@ class _SpellLineState extends State<SpellLine> {
                       spell: widget.spell,
                       spellSaved: (spell) {
                         widget.spellSaved(spell);
+                        Navigator.pop(context);
+                      },
+                      deleteSpell: () {
+                        widget.deleteSpell();
+                        Navigator.pop(context);
                       }
                     )
                   );
@@ -206,6 +213,7 @@ class _SpellSectionState extends State<SpellSection> {
           )
         ),
         Column(
+          spacing: 5,
           children: List.generate(
             spells.length,
             (index) => SpellLine(
@@ -215,6 +223,11 @@ class _SpellSectionState extends State<SpellSection> {
                   spells[index] = updatedSpell;
                 });
               },
+              deleteSpell: () {
+                setState(() {
+                  spells.removeAt(index);
+                });
+              }
             ),
           )
         )
@@ -232,9 +245,11 @@ class SpellBox extends StatefulWidget {
     super.key,
     required this.spell,
     required this.spellSaved,
+    required this.deleteSpell,
   });
 
   final void Function(Spell) spellSaved;
+  final void Function() deleteSpell;
   final Spell spell;
 
   @override
@@ -301,12 +316,27 @@ class _SpellBoxState extends State<SpellBox> {
                 ),
               ),
               Text("SPELL DESCRIPTION", style: TextStyle(fontSize: 8)),
-              TextButton(
-                child: Text("SAVE SPELL"),
-                onPressed: () {
-                  _saveSpell();
-                  widget.spellSaved(spell);
-                }
+              Row(
+                mainAxisAlignment: .spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      widget.deleteSpell();
+                    }, 
+                    icon: Icon(
+                      Icons.delete_outline, 
+                      color: const Color.fromARGB(255, 220, 26, 1),
+                      size: 30,
+                    )
+                  ),
+                  TextButton(
+                    child: Text("SAVE SPELL"),
+                    onPressed: () {
+                      _saveSpell();
+                      widget.spellSaved(spell);
+                    }
+                  ),
+                ],
               ),
             ],
           ),
