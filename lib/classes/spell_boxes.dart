@@ -23,7 +23,7 @@ extension SpellLevels on SpellLevel {
       case SpellLevel.nine:
         return "9";
       case SpellLevel.cantrip:
-        return "CANTRIPS";
+        return "CANTRIP";
     }
   }
 }
@@ -31,9 +31,11 @@ extension SpellLevels on SpellLevel {
 
 class Spell {
   final String name;
+  final SpellLevel level;
   final String description;
 
   const Spell({
+    required this.level,
     this.name = "",
     this.description = "",
   });
@@ -46,12 +48,10 @@ class SpellLine extends StatefulWidget {
   const SpellLine({
     super.key,
     this.prepared = false,
-    this.cantrip = false,
-    this.spell = const Spell(),
+    required this.spell,
   });
 
   final bool prepared;
-  final bool cantrip;
   final Spell spell;
 
   @override
@@ -71,7 +71,7 @@ class _SpellLineState extends State<SpellLine> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (!widget.cantrip) SizedBox(
+        if (!(widget.spell.level == .cantrip)) SizedBox(
           width: 30,
           height: 30,
           child: IconButton(
@@ -86,7 +86,16 @@ class _SpellLineState extends State<SpellLine> {
         ),
         Expanded(
           child: OutlinedButton(
-            onPressed: (){}, 
+            onPressed: (){
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: SpellBox(spell: widget.spell)
+                  );
+                }
+              );
+            }, 
             child: Text(widget.spell.name),
           ),
         )
@@ -117,7 +126,7 @@ class _SpellSectionState extends State<SpellSection> {
     super.initState();
   }
 
-  var spells = <SpellLine>[];
+  var spells = <Spell>[];
 
   @override
   Widget build(BuildContext context) {
@@ -183,7 +192,7 @@ class _SpellSectionState extends State<SpellSection> {
                   icon: Icon(Icons.add),
                   onPressed: () {
                     setState(() {
-                      spells.add(SpellLine(cantrip: widget.level == .cantrip));
+                      spells.add(Spell(level: widget.level));
                     });
                   },
                 ),
@@ -192,9 +201,79 @@ class _SpellSectionState extends State<SpellSection> {
           )
         ),
         Column(
-          children: spells
+          children: spells.map((spell) => SpellLine(spell: spell)).toList()
         )
       ],
+    );
+  }
+}
+
+
+
+// Spell Box
+
+class SpellBox extends StatefulWidget {
+  const SpellBox({
+    super.key,
+    required this.spell,
+  });
+
+  final Spell spell;
+
+  @override
+  State<SpellBox> createState() => _SpellBoxState();
+}
+
+class _SpellBoxState extends State<SpellBox> {
+  late Spell spell;
+
+  @override
+  void initState() {
+    super.initState();
+    spell = widget.spell;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 500,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Text(spell.level == .cantrip ? "Cantrip" : "Level ${spell.level.num} Spell"),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30),
+                child: Column(
+                  children: [
+                    TextField(
+                      textAlign: .center,
+                      decoration: const InputDecoration(
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 1),
+                        border: OutlineInputBorder()
+                      ),
+                    ),
+                    Text("SPELL NAME", style: TextStyle(fontSize: 8)),
+                  ],
+                ),
+              ),
+              TextField(
+                maxLines: null,
+                decoration: const InputDecoration(
+                  isDense: true,
+                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 1),
+                  border: OutlineInputBorder()
+                ),
+              ),
+              Text("SPELL DESCRIPTION", style: TextStyle(fontSize: 8)),
+            ],
+          ),
+        )
+      )
     );
   }
 }

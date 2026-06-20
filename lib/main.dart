@@ -42,7 +42,8 @@ class MainApp extends StatelessWidget {
                     )
                   ]
                 ),
-                Row(         // First page 3 columns
+                Row( 
+                  crossAxisAlignment: .start,        // First page 3 columns
                   children: [
             
                     // First Column
@@ -173,24 +174,32 @@ class MainApp extends StatelessWidget {
                 ),
             
                 Row(
+                  crossAxisAlignment: .start,
                   children: [
                     Expanded(
                       child: Column(
                         children: [
-            
-                        ]
-                      )
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
                           SpellSection(level: .cantrip),
+                          SpellSection(level: .one),
+                          SpellSection(level: .two),
                         ]
                       )
                     ),
                     Expanded(
                       child: Column(
                         children: [
+                          SpellSection(level: .three),
+                          SpellSection(level: .four),
+                          SpellSection(level: .five),
+                        ]
+                      )
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          SpellSection(level: .six),
+                          SpellSection(level: .seven),
+                          SpellSection(level: .eight),
                           SpellSection(level: .nine)
                         ]
                       )
