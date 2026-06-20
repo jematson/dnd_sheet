@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import './classes.dart';
 
 class SkillLine extends StatefulWidget {
   const SkillLine({
@@ -73,45 +74,42 @@ class AbilityBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
-        child: Column(
-          children: [
-            Text(
-              value,
+    return CardSection(
+      child: Column(
+        children: [
+          Text(
+            value,
+            textAlign: .center,
+            style: TextStyle(fontSize: 12)
+          ),
+          SizedBox(
+            width: 50,
+            child: TextField(
               textAlign: .center,
-              style: TextStyle(fontSize: 12)
-            ),
-            SizedBox(
-              width: 50,
-              child: TextField(
-                textAlign: .center,
-                textAlignVertical: .center,
-                inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
-                decoration: const InputDecoration(
-                  isDense: true,
-                  contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 1),
-                  border: OutlineInputBorder()
-                ),
+              textAlignVertical: .center,
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+              decoration: const InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 1),
+                border: OutlineInputBorder()
               ),
             ),
-            SizedBox(
-              width: 27,
-              height: 27,
-              child: TextField(
-                textAlign: .center,
-                textAlignVertical: .center,
-                style: TextStyle(fontSize: 12),
-                decoration: const InputDecoration(
-                  isDense: true,
-                  contentPadding: EdgeInsets.symmetric(vertical: 7, horizontal: 1),
-                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))
-                ),
+          ),
+          SizedBox(
+            width: 27,
+            height: 27,
+            child: TextField(
+              textAlign: .center,
+              textAlignVertical: .center,
+              style: TextStyle(fontSize: 12),
+              decoration: const InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.symmetric(vertical: 7, horizontal: 1),
+                border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10)))
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

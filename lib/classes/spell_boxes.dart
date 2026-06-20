@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './classes.dart';
 
 enum SpellLevel { cantrip, one, two, three, four, five, six, seven, eight, nine }
 extension SpellLevels on SpellLevel {
@@ -144,7 +145,7 @@ class _SpellSectionState extends State<SpellSection> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Card(
+        CardSection(
           child: Row(
             children:[
               widget.level == .cantrip
@@ -152,48 +153,45 @@ class _SpellSectionState extends State<SpellSection> {
                   child: Text("CANTRIPS", textAlign: .center)
               )
               :Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Row(
-                    spacing: 5,
-                    children: [
-                      Text(
-                        widget.level.num,
-                        style: TextStyle(fontSize: 20), 
-                        textAlign: .center
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text("SLOTS TOTAL", style: TextStyle(fontSize: 8)),
-                            TextField(
-                              textAlignVertical: .center,
-                              style: TextStyle(fontSize: 14),
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                isDense: true
-                              ),
+                child: Row(
+                  spacing: 5,
+                  children: [
+                    Text(
+                      widget.level.num,
+                      style: TextStyle(fontSize: 20), 
+                      textAlign: .center
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text("SLOTS TOTAL", style: TextStyle(fontSize: 8)),
+                          TextField(
+                            textAlignVertical: .center,
+                            style: TextStyle(fontSize: 14),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              isDense: true
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text("SLOTS EXPENDED", style: TextStyle(fontSize: 8)),
-                            TextField(
-                              textAlignVertical: .center,
-                              style: TextStyle(fontSize: 14),
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                isDense: true
-                              ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text("SLOTS EXPENDED", style: TextStyle(fontSize: 8)),
+                          TextField(
+                            textAlignVertical: .center,
+                            style: TextStyle(fontSize: 14),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              isDense: true
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
 

@@ -19,10 +19,41 @@ class MainApp extends StatelessWidget {
             // Fixed Header
             Card(
               child: Row(
+                spacing: 20,
+                crossAxisAlignment: .end,
                 children: [
                   Expanded(
-                    child: ValueBox(label: "CHARACTER NAME", position: .bottom)
+                    child: LabeledField(label: "CHARACTER NAME", position: .bottom, size: 22)
                   ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Row(
+                          spacing: 10,
+                          children: [
+                            LabeledField.square(label: "LEVEL", position: .bottom, align: .center),
+                            Expanded(
+                              child: LabeledField(label: "CLASS", position: .bottom)
+                            ),
+                          ],
+                        ),
+                        Row(
+                          spacing: 10,
+                          children: [
+                            Expanded(
+                              child: LabeledField(label: "RACE", position: .bottom)
+                            ),
+                            Expanded(
+                              child: LabeledField(label: "ALIGNMENT", position: .bottom)
+                            ),
+                            Expanded(
+                              child: LabeledField(label: "BACKGROUND", position: .bottom)
+                            ),
+                          ],
+                        )
+                      ]
+                    )
+                  )
                 ],
               )
             ),
@@ -33,45 +64,14 @@ class MainApp extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      Row(      // First Page Header
-                        children: [
-                          
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: ValueBox(label: "CLASS", position: .bottom)
-                                    ),
-                                    ValueBox.square(label: "LEVEL", position: .bottom),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: ValueBox(label: "RACE", position: .bottom)
-                                    ),
-                                    Expanded(
-                                      child: ValueBox(label: "ALIGMENT", position: .bottom)
-                                    ),
-                                    Expanded(
-                                      child: ValueBox(label: "BACKGROUND", position: .bottom)
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ]
-                      ),
+
                       Row( 
                         crossAxisAlignment: .start,        // First page 3 columns
                         children: [
                   
                           // First Column
                           SizedBox(
-                            width: 270,
+                            width: 275,
                             child: Column(
                               children: [
                                 Row(
@@ -92,7 +92,7 @@ class MainApp extends StatelessWidget {
                                     Expanded(
                                       child: Column(
                                         children: [
-                                          Card(
+                                          CardSection(
                                             child: Column(
                                               children: [
                                                 Text(
@@ -111,7 +111,7 @@ class MainApp extends StatelessWidget {
                                               ]
                                             )
                                           ),
-                                          Card(
+                                          CardSection(
                                             child: Column(
                                               children: [
                                                 Text(
@@ -162,102 +162,44 @@ class MainApp extends StatelessWidget {
                                 Row(
                                   mainAxisAlignment: .center,
                                   children: [
-                                    ValueBox.square(label: "AC", position: .bottom),
-                                    ValueBox.square(label: "INITIATIVE", position: .bottom),
-                                    ValueBox.square(label: "SPEED", position: .bottom),
+                                    ValueBox.square(label: "AC", position: .bottom, align: .center),
+                                    ValueBox.square(label: "INITIATIVE", position: .bottom, align: .center),
+                                    ValueBox.square(label: "SPEED", position: .bottom, align: .center),
                                   ],
                                 ),
-                                Text("HIT POINTS"),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: ValueBox(label: "MAX", position: .bottom)
-                                    ),
-                                    Expanded(
-                                      child: ValueBox(label: "CURRENT", position: .bottom)
-                                    ),
-                                    Expanded(
-                                      child: ValueBox(label: "TEMP", position: .bottom)
-                                    ),
-                                  ],
+                                CardSection(
+                                  child: Column(
+                                    spacing: 5,
+                                    children: [
+                                      Text("HIT POINTS"),
+                                      Row(
+                                        spacing: 10,
+                                        children: [
+                                          Expanded(
+                                            child: LabeledField(label: "MAX", position: .bottom, align: .center)
+                                          ),
+                                          Expanded(
+                                            child: LabeledField(label: "CURRENT", position: .bottom, align: .center)
+                                          ),
+                                          Expanded(
+                                            child: LabeledField(label: "TEMP", position: .bottom, align: .center)
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SavesBox(),
-                                Card(
+                                CardSection(
                                   child: Column(
                                     children: [
                                       Row(
-                                        spacing: 4,
                                         children: [
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Text("CP"),
-                                                TextField(
-                                                  style: TextStyle(fontSize: 10),
-                                                  decoration: const InputDecoration(
-                                                    border: OutlineInputBorder(),
-                                                    isDense: true
-                                                  ),
-                                                )
-                                              ]
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Text("SP"),
-                                                TextField(
-                                                  style: TextStyle(fontSize: 10),
-                                                  decoration: const InputDecoration(
-                                                    border: OutlineInputBorder(),
-                                                    isDense: true
-                                                  ),
-                                                )
-                                              ]
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Text("EP"),
-                                                TextField(
-                                                  style: TextStyle(fontSize: 10),
-                                                  decoration: const InputDecoration(
-                                                    border: OutlineInputBorder(),
-                                                    isDense: true
-                                                  ),
-                                                )
-                                              ]
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Text("GP"),
-                                                TextField(
-                                                  style: TextStyle(fontSize: 10),
-                                                  decoration: const InputDecoration(
-                                                    border: OutlineInputBorder(),
-                                                    isDense: true
-                                                  ),
-                                                )
-                                              ]
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              children: [
-                                                Text("PP"),
-                                                TextField(
-                                                  style: TextStyle(fontSize: 10),
-                                                  decoration: const InputDecoration(
-                                                    border: OutlineInputBorder(),
-                                                    isDense: true
-                                                  ),
-                                                )
-                                              ]
-                                            ),
-                                          ),
+                                          Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center)),
+                                          Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center)),
+                                          Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center)),
+                                          Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center)),
+                                          Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center)),
                                         ]
                                       ),
                                       ValueBox(label: "EQUIPMENT", position: .bottom, multiline: true)

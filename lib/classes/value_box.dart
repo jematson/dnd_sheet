@@ -4,56 +4,48 @@ import 'package:flutter/material.dart';
 enum LabelPosition { left, right, top, bottom }
 
 
-class ValueBox extends StatelessWidget {
-  const ValueBox({
+
+class LabeledField extends StatelessWidget {
+  const LabeledField({
     super.key,
     required this.label,
-    this.position = LabelPosition.top,
+    this.position = LabelPosition.bottom,
     this.square = false,
-    this.expand = false,
     this.multiline = false,
+    this.size = 14,
+    this.align = .start,
     this.controller,
   });
 
-  const ValueBox.square({
+  const LabeledField.square({
     super.key,
     required this.label,
-    this.position = LabelPosition.top,
+    this.position = LabelPosition.bottom,
     this.multiline = false,
+    this.size = 16,
+    this.align = .start,
     this.controller,
-  })  : square = true,
-        expand = false;
-
-  const ValueBox.expanded({
-    super.key,
-    required this.label,
-    this.position = LabelPosition.top,
-    this.multiline = false,
-    this.controller,
-  })  : square = false,
-        expand = true;
+  }) : square = true;
 
   final String label;
   final LabelPosition position;
-
-  /// Fixed width box
   final bool square;
-
-  /// Wrap the whole widget in Expanded
-  final bool expand;
-
-  /// Grow vertically
   final bool multiline;
-
+  final double size;
+  final TextAlign align;
   final TextEditingController? controller;
 
-  Widget _textField() {
+  Widget _field() {
     Widget field = TextField(
+      textAlign: align,
+      style: TextStyle(fontSize: size),
       controller: controller,
-      minLines: multiline ? 1 : 1,
+      minLines: multiline ? 4 : 1,
       maxLines: multiline ? null : 1,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
+        isDense: true,
+        contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 2.0)
       ),
     );
 
@@ -77,47 +69,115 @@ class ValueBox extends StatelessWidget {
       ),
     );
 
-    final field = _textField();
+    final field = _field();
 
-    Widget child = switch (position) {
+    return switch (position) {
       LabelPosition.left => Row(
-          spacing: 10,
-          children: [
-            labelWidget,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          labelWidget,
+          const SizedBox(width: 8),
+          if (square)
+            field
+          else
             Expanded(child: field),
-          ],
-        ),
+        ],
+      ),
 
       LabelPosition.right => Row(
-          spacing: 10,
-          children: [
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (square)
+            field
+          else
             Expanded(child: field),
-            labelWidget,
-          ],
-        ),
+          const SizedBox(width: 8),
+          labelWidget,
+        ],
+      ),
 
       LabelPosition.top => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            labelWidget,
-            field,
-          ],
-        ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          labelWidget,
+          field,
+        ],
+      ),
 
       LabelPosition.bottom => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            field,
-            labelWidget,
-          ],
-        ),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          field,
+          labelWidget,
+        ],
+      ),
     };
+  }
+}
 
-    if (expand) {
-      child = Expanded(child: child);
-    }
 
+
+
+class ValueBox extends StatelessWidget {
+  const ValueBox({
+    super.key,
+    required this.label,
+    this.position = LabelPosition.bottom,
+    this.square = false,
+    this.multiline = false,
+    this.size = 16,
+    this.align = .start,
+    this.controller,
+  });
+
+  const ValueBox.square({
+    super.key,
+    required this.label,
+    this.position = LabelPosition.bottom,
+    this.multiline = false,
+    this.size = 16,
+    this.align = .start,
+    this.controller,
+  }) : square = true;
+
+  final String label;
+  final LabelPosition position;
+  final bool square;
+  final bool multiline;
+  final double size;
+  final TextAlign align;
+  final TextEditingController? controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return CardSection(
+      child: LabeledField(
+        label: label,
+        position: position,
+        square: square,
+        multiline: multiline,
+        size: size,
+        align: align,
+        controller: controller,
+      ),
+    );
+  }
+}
+
+
+
+class CardSection extends StatelessWidget {
+  const CardSection({
+    super.key,
+    required this.child,
+  });
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
     return Card(
+      color: Theme.of(context).colorScheme.onInverseSurface,
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: child,
@@ -172,7 +232,7 @@ class _SavesBoxState extends State<SavesBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return CardSection(
       child: SizedBox(
         width: 130,
         child: Column(
