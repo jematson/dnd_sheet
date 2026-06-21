@@ -189,7 +189,13 @@ class MainApp extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                                
                                 SavesBox(),
+
+                                CardSection(
+                                  child: AttackSection()
+                                ),
+
                                 CardSection(
                                   child: Column(
                                     spacing: 10,
@@ -207,7 +213,9 @@ class MainApp extends StatelessWidget {
                                       LabeledField(label: "EQUIPMENT", position: .bottom, multiline: true)
                                     ],
                                   )
-                                )
+                                ),
+
+
                               ]
                             )
                           ),
