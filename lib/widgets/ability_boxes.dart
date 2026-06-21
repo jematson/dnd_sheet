@@ -7,10 +7,12 @@ class SkillLine extends StatefulWidget {
     super.key,
     required this.value,
     this.pressed = false,
+    required this.controller,
   });
 
   final String value;
   final bool pressed;
+  final TextEditingController controller;
 
   @override
   State<SkillLine> createState() => _SkillLineState();
@@ -45,6 +47,7 @@ class _SkillLineState extends State<SkillLine> {
         SizedBox(
           width: 25,
           child: TextField(
+            controller: widget.controller,
             textAlign: .center,
             style: TextStyle(fontSize: 12),
             decoration: const InputDecoration(
@@ -67,10 +70,14 @@ class _SkillLineState extends State<SkillLine> {
 class AbilityBox extends StatelessWidget {
   const AbilityBox({
     super.key,
-    required this.value
+    required this.value,
+    required this.controller,
+    required this.modController,
   });
 
   final String value;
+  final TextEditingController controller;
+  final TextEditingController modController;
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +92,7 @@ class AbilityBox extends StatelessWidget {
           SizedBox(
             width: 50,
             child: TextField(
+              controller: controller,
               textAlign: .center,
               textAlignVertical: .center,
               inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
@@ -99,6 +107,7 @@ class AbilityBox extends StatelessWidget {
             width: 27,
             height: 27,
             child: TextField(
+              controller: modController,
               textAlign: .center,
               textAlignVertical: .center,
               style: TextStyle(fontSize: 12),

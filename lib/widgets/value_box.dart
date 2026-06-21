@@ -14,7 +14,7 @@ class LabeledField extends StatelessWidget {
     this.size = 14,
     this.align = .start,
     this.maxLines = 2,
-    this.controller,
+    required this.controller,
   });
 
   const LabeledField.square({
@@ -25,7 +25,7 @@ class LabeledField extends StatelessWidget {
     this.size = 16,
     this.align = .start,
     this.maxLines = 2,
-    this.controller,
+    required this.controller,
   }) : square = true;
 
   final String label;
@@ -35,7 +35,7 @@ class LabeledField extends StatelessWidget {
   final double size;
   final TextAlign align;
   final int maxLines;
-  final TextEditingController? controller;
+  final TextEditingController controller;
 
   Widget _field() {
     Widget field = TextField(
@@ -130,7 +130,7 @@ class ValueBox extends StatelessWidget {
     this.size = 16,
     this.align = .start,
     this.maxLines = 2,
-    this.controller,
+    required this.controller,
   });
 
   const ValueBox.square({
@@ -141,7 +141,7 @@ class ValueBox extends StatelessWidget {
     this.size = 16,
     this.align = .start,
     this.maxLines = 2,
-    this.controller,
+    required this.controller,
   }) : square = true;
 
   final String label;
@@ -151,7 +151,7 @@ class ValueBox extends StatelessWidget {
   final double size;
   final TextAlign align;
   final int maxLines;
-  final TextEditingController? controller;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {

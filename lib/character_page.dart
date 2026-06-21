@@ -1,6 +1,6 @@
-import 'package:dnd_sheet/classes/dnd_character.dart';
 import 'package:flutter/material.dart';
 import 'widgets/widgets.dart';
+import 'classes/classes.dart';
 
 class CharacterPage extends StatefulWidget {
   const CharacterPage({
@@ -18,15 +18,15 @@ class _CharacterPageState extends State<CharacterPage> {
   late DNDCharacter character;
   late DNDCharacter editedCharacter;
 
-  final nameController = TextEditingController();
-  final levelController = TextEditingController();
+  late CharacterController cc;
 
 
   @override
   void initState() {
     super.initState();
     character = widget.character;
-    editedCharacter = widget.character; // MAKE DEEP COPY
+    editedCharacter = widget.character.copy();
+    cc = CharacterController(character: character);
   }
 
 
@@ -42,7 +42,7 @@ class _CharacterPageState extends State<CharacterPage> {
             crossAxisAlignment: .end,
             children: [
               Expanded(
-                child: LabeledField(label: "CHARACTER NAME", position: .bottom, size: 22)
+                child: LabeledField(label: "CHARACTER NAME", position: .bottom, size: 22, controller: cc.nameController)
               ),
               Expanded(
                 child: Column(
@@ -50,9 +50,9 @@ class _CharacterPageState extends State<CharacterPage> {
                     Row(
                       spacing: 10,
                       children: [
-                        LabeledField.square(label: "LEVEL", position: .bottom, align: .center),
+                        LabeledField.square(label: "LEVEL", position: .bottom, align: .center, controller: cc.levelController),
                         Expanded(
-                          child: LabeledField(label: "CLASS", position: .bottom)
+                          child: LabeledField(label: "CLASS", position: .bottom, controller: cc.classController)
                         ),
                       ],
                     ),
@@ -60,13 +60,13 @@ class _CharacterPageState extends State<CharacterPage> {
                       spacing: 10,
                       children: [
                         Expanded(
-                          child: LabeledField(label: "RACE", position: .bottom)
+                          child: LabeledField(label: "RACE", position: .bottom, controller: cc.raceController)
                         ),
                         Expanded(
-                          child: LabeledField(label: "ALIGNMENT", position: .bottom)
+                          child: LabeledField(label: "ALIGNMENT", position: .bottom, controller: cc.alignmentController)
                         ),
                         Expanded(
-                          child: LabeledField(label: "BACKGROUND", position: .bottom)
+                          child: LabeledField(label: "BACKGROUND", position: .bottom, controller: cc.backgroundController)
                         ),
                       ],
                     )
@@ -100,12 +100,12 @@ class _CharacterPageState extends State<CharacterPage> {
                                   child: Column(
                                     spacing: 15,
                                     children: [
-                                      AbilityBox(value: "STR"),
-                                      AbilityBox(value: "DEX"),
-                                      AbilityBox(value: "CON"),
-                                      AbilityBox(value: "INT"),
-                                      AbilityBox(value: "WIS"),
-                                      AbilityBox(value: "CHA"),
+                                      AbilityBox(value: "STR", controller: cc.strengthController, modController: cc.strModController),
+                                      AbilityBox(value: "DEX", controller: cc.dexterityController, modController: cc.dexModController),
+                                      AbilityBox(value: "CON", controller: cc.constitutionController, modController: cc.conModController),
+                                      AbilityBox(value: "INT", controller: cc.intelligenceController, modController: cc.intModController,),
+                                      AbilityBox(value: "WIS", controller: cc.wisdomController, modController: cc.wisModController,),
+                                      AbilityBox(value: "CHA", controller: cc.charismaController, modController: cc.chaModController),
                                     ]
                                   )
                                 ),
@@ -122,12 +122,12 @@ class _CharacterPageState extends State<CharacterPage> {
                                                 fontWeight: .bold
                                               )
                                             ),
-                                            SkillLine(value: "Strength"),
-                                            SkillLine(value: "Dexterity"),
-                                            SkillLine(value: "Constitution"),
-                                            SkillLine(value: "Intelligence"),
-                                            SkillLine(value: "Wisdom"),
-                                            SkillLine(value: "Charisma"),
+                                            SkillLine(value: "Strength", controller: cc.strSaveController),
+                                            SkillLine(value: "Dexterity", controller: cc.dexSaveController),
+                                            SkillLine(value: "Constitution", controller: cc.conSaveController,),
+                                            SkillLine(value: "Intelligence", controller: cc.intSaveController,),
+                                            SkillLine(value: "Wisdom", controller: cc.wisSaveController,),
+                                            SkillLine(value: "Charisma", controller: cc.chaSaveController,),
                                           ]
                                         )
                                       ),
@@ -141,24 +141,24 @@ class _CharacterPageState extends State<CharacterPage> {
                                                 fontWeight: .bold
                                               )
                                             ),
-                                            SkillLine(value: "Acrobatics (dex)"),
-                                            SkillLine(value: "Animal Handling (wis)"),
-                                            SkillLine(value: "Arcana (int)"),
-                                            SkillLine(value: "Athletics (str)"),
-                                            SkillLine(value: "Deception (cha)"),
-                                            SkillLine(value: "History (int)"),
-                                            SkillLine(value: "Insight (wis)"),
-                                            SkillLine(value: "Intimidation (cha)"),
-                                            SkillLine(value: "Investigation (int)"),
-                                            SkillLine(value: "Medicine (wis)"),
-                                            SkillLine(value: "Nature (wis)"),
-                                            SkillLine(value: "Perception (wis)"),
-                                            SkillLine(value: "Performance (cha)"),
-                                            SkillLine(value: "Persuasion (cha)"),
-                                            SkillLine(value: "Religion (int)"),
-                                            SkillLine(value: "Sleight of Hand (dex)"),
-                                            SkillLine(value: "Stealth (dex)"),
-                                            SkillLine(value: "Survival (wis)"),
+                                            SkillLine(value: "Acrobatics (dex)", controller: cc.acrobaticsController),
+                                            SkillLine(value: "Animal Handling (wis)", controller: cc.animalHandlingController),
+                                            SkillLine(value: "Arcana (int)", controller: cc.arcanaController),
+                                            SkillLine(value: "Athletics (str)", controller: cc.athleticsController),
+                                            SkillLine(value: "Deception (cha)", controller: cc.deceptionController),
+                                            SkillLine(value: "History (int)", controller: cc.historyController),
+                                            SkillLine(value: "Insight (wis)", controller: cc.insightController),
+                                            SkillLine(value: "Intimidation (cha)", controller: cc.intimidationController),
+                                            SkillLine(value: "Investigation (int)", controller: cc.investigationController),
+                                            SkillLine(value: "Medicine (wis)", controller: cc.medicineController),
+                                            SkillLine(value: "Nature (wis)", controller: cc.natureController),
+                                            SkillLine(value: "Perception (wis)", controller: cc.perceptionController),
+                                            SkillLine(value: "Performance (cha)", controller: cc.performanceController),
+                                            SkillLine(value: "Persuasion (cha)", controller: cc.persuasionController),
+                                            SkillLine(value: "Religion (int)", controller: cc.religionController),
+                                            SkillLine(value: "Sleight of Hand (dex)", controller: cc.sleightOfHandController),
+                                            SkillLine(value: "Stealth (dex)", controller: cc.stealthController),
+                                            SkillLine(value: "Survival (wis)", controller: cc.survivalController),
                                           ]
                                         )
                                       ),
@@ -168,7 +168,7 @@ class _CharacterPageState extends State<CharacterPage> {
                               ]
                             ),
 
-                            ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true, maxLines: 4)
+                            ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true, maxLines: 4, controller: cc.proficienciesController)
                           ]
                         )
                       ),
@@ -181,9 +181,9 @@ class _CharacterPageState extends State<CharacterPage> {
                             Row(
                               mainAxisAlignment: .center,
                               children: [
-                                ValueBox.square(label: "AC", position: .bottom, align: .center),
-                                ValueBox.square(label: "INITIATIVE", position: .bottom, align: .center),
-                                ValueBox.square(label: "SPEED", position: .bottom, align: .center),
+                                ValueBox.square(label: "AC", position: .bottom, align: .center, controller: cc.acController),
+                                ValueBox.square(label: "INITIATIVE", position: .bottom, align: .center, controller: cc.initiativeController),
+                                ValueBox.square(label: "SPEED", position: .bottom, align: .center, controller: cc.speedController),
                               ],
                             ),
                             CardSection(
@@ -195,13 +195,13 @@ class _CharacterPageState extends State<CharacterPage> {
                                     spacing: 10,
                                     children: [
                                       Expanded(
-                                        child: LabeledField(label: "MAX", position: .bottom, align: .center)
+                                        child: LabeledField(label: "MAX", position: .bottom, align: .center, controller: cc.hpMaxController)
                                       ),
                                       Expanded(
-                                        child: LabeledField(label: "CURRENT", position: .bottom, align: .center)
+                                        child: LabeledField(label: "CURRENT", position: .bottom, align: .center, controller: cc.hpCurrController)
                                       ),
                                       Expanded(
-                                        child: LabeledField(label: "TEMP", position: .bottom, align: .center)
+                                        child: LabeledField(label: "TEMP", position: .bottom, align: .center, controller: cc.hpTempController)
                                       ),
                                     ],
                                   ),
@@ -216,8 +216,8 @@ class _CharacterPageState extends State<CharacterPage> {
                                     child: Column(
                                       spacing: 5,
                                       children: [
-                                        LabeledField(label: "TOTAL", position: .left, size: 10),
-                                        LabeledField(label: "HIT DICE", position: .bottom, size: 14, align: .center)
+                                        LabeledField(label: "TOTAL", position: .left, size: 10, controller: cc.hitDiceTotalController),
+                                        LabeledField(label: "HIT DICE", position: .bottom, size: 14, align: .center, controller: cc.hitDiceCurrController)
                                       ]
                                     )
                                   ),
@@ -237,14 +237,14 @@ class _CharacterPageState extends State<CharacterPage> {
                                   Row(
                                     spacing: 5,
                                     children: [
-                                      Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center)),
-                                      Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center)),
-                                      Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center)),
-                                      Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center)),
-                                      Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center)),
+                                      Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center, controller: cc.cpController)),
+                                      Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center, controller: cc.spController)),
+                                      Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center, controller: cc.epController)),
+                                      Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center, controller: cc.gpController)),
+                                      Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center, controller: cc.ppController)),
                                     ]
                                   ),
-                                  LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24)
+                                  LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24, controller: cc.inventoryController)
                                 ],
                               )
                             ),
@@ -259,10 +259,10 @@ class _CharacterPageState extends State<CharacterPage> {
                         child: Column(
                           crossAxisAlignment: .start,
                           children: [
-                            ValueBox.square(label: "INSPIRATION", position: .right),
-                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right),
-                            ValueBox.square(label: "PASSIVE PERCEPTION", position: .right),
-                            ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30),
+                            ValueBox.square(label: "INSPIRATION", position: .right, controller: cc.inspirationController),
+                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right, controller: cc.proficiencyBonusController),
+                            ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, controller: cc.passivePerceptionController),
+                            ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraitsController),
                           ]
                         )
                       )
@@ -274,19 +274,19 @@ class _CharacterPageState extends State<CharacterPage> {
                   Row(      // Spellcasting Header
                     children: [
                       Expanded(
-                        child: ValueBox(label: "SPELLCASTING CLASS", position: .bottom)
+                        child: ValueBox(label: "SPELLCASTING CLASS", position: .bottom, controller: cc.spellcastingClassController)
                       ),
                       Expanded(
                         child: Row(
                           children: [
                             Expanded(
-                              child: ValueBox(label: "SPELLCASTING ABILITY", position: .bottom)
+                              child: ValueBox(label: "SPELLCASTING ABILITY", position: .bottom, controller: cc.spellcastingAbilityController)
                             ),
                             Expanded(
-                              child: ValueBox(label: "SPELL SAVE DC", position: .bottom)
+                              child: ValueBox(label: "SPELL SAVE DC", position: .bottom, controller: cc.spellSaveDCController)
                             ),
                             Expanded(
-                              child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom)
+                              child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom, controller: cc.spellAttackBonusController)
                             ),
                           ],
                         ),
@@ -336,7 +336,7 @@ class _CharacterPageState extends State<CharacterPage> {
                       Expanded(
                         child: Column(
                           children: [
-                            ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19)
+                            ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19, controller: cc.backstoryController)
                           ]
                         ),
                       ),
@@ -350,26 +350,26 @@ class _CharacterPageState extends State<CharacterPage> {
                                   Row(
                                     spacing: 5,
                                     children: [
-                                      Expanded(child: LabeledField(label: "AGE", position: .bottom)),
-                                      Expanded(child: LabeledField(label: "HEIGHT", position: .bottom)),
-                                      Expanded(child: LabeledField(label: "WEIGHT", position: .bottom)),
+                                      Expanded(child: LabeledField(label: "AGE", position: .bottom, controller: cc.ageController)),
+                                      Expanded(child: LabeledField(label: "HEIGHT", position: .bottom, controller: cc.heightController)),
+                                      Expanded(child: LabeledField(label: "WEIGHT", position: .bottom, controller: cc.weightController)),
                                     ]
                                   ),
                                   Row(
                                     spacing: 5,
                                     children: [
-                                      Expanded(child: LabeledField(label: "EYES", position: .bottom)),
-                                      Expanded(child: LabeledField(label: "SKIN", position: .bottom)),
-                                      Expanded(child: LabeledField(label: "HAIR", position: .bottom)),
+                                      Expanded(child: LabeledField(label: "EYES", position: .bottom, controller: cc.eyesController)),
+                                      Expanded(child: LabeledField(label: "SKIN", position: .bottom, controller: cc.skinController)),
+                                      Expanded(child: LabeledField(label: "HAIR", position: .bottom, controller: cc.hairController)),
                                     ]
                                   ),
                                 ]
                               )
                             ),
-                            ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true),
-                            ValueBox(label: "IDEALS", position: .bottom, multiline: true),
-                            ValueBox(label: "BONDS", position: .bottom, multiline: true),
-                            ValueBox(label: "FLAWS", position: .bottom, multiline: true),
+                            ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true, controller: cc.personalityTraitsController),
+                            ValueBox(label: "IDEALS", position: .bottom, multiline: true, controller: cc.idealsController),
+                            ValueBox(label: "BONDS", position: .bottom, multiline: true, controller: cc.bondsController),
+                            ValueBox(label: "FLAWS", position: .bottom, multiline: true, controller: cc.flawsController),
                           ]
                         ),
                       ),
@@ -377,7 +377,7 @@ class _CharacterPageState extends State<CharacterPage> {
                     ]
                   ),
 
-                  ValueBox(label: "SESSION NOTES", position: .top, multiline: true, maxLines: 4)
+                  ValueBox(label: "SESSION NOTES", position: .top, multiline: true, maxLines: 4, controller: cc.sessionNotesController)
 
                   // END OF CHARACTER SHEET
                 ]

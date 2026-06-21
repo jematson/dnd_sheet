@@ -1,5 +1,10 @@
 import './classes.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+
+part 'dnd_character.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class DNDCharacter {
   String name;
   String className;
@@ -91,6 +96,8 @@ class DNDCharacter {
   String hair;
   String backstory;
 
+  // Attacks
+  List<Attack> attacks;
 
   // Equipment
   String cp;
@@ -107,16 +114,16 @@ class DNDCharacter {
   String spellSaveDC;
   String spellAttackBonus;
 
-  List<Spell> cantrips;
-  List <Spell> spells1;
-  List <Spell> spells2;
-  List <Spell> spells3;
-  List <Spell> spells4;
-  List <Spell> spells5;
-  List <Spell> spells6;
-  List <Spell> spells7;
-  List <Spell> spells8;
-  List <Spell> spells9;
+  late SpellLevelSection cantrips;
+  late SpellLevelSection spells1;
+  late SpellLevelSection spells2;
+  late SpellLevelSection spells3;
+  late SpellLevelSection spells4;
+  late SpellLevelSection spells5;
+  late SpellLevelSection spells6;
+  late SpellLevelSection spells7;
+  late SpellLevelSection spells8;
+  late SpellLevelSection spells9;
 
   String sessionNotes;
 
@@ -193,6 +200,7 @@ class DNDCharacter {
     this.skin = "",
     this.hair = "",
     this.backstory = "",
+    List<Attack>? attacks,
     this.cp = "",
     this.sp = "",
     this.ep = "",
@@ -203,16 +211,36 @@ class DNDCharacter {
     this.spellSaveDC = "",
     this.spellcastingAbility = "",
     this.spellcastingClass = "",
-    this.cantrips = const [],
-    this.spells1 = const [],
-    this.spells2 = const [],
-    this.spells3 = const [],
-    this.spells4 = const [],
-    this.spells5 = const [],
-    this.spells6 = const [],
-    this.spells7 = const [],
-    this.spells8 = const [],
-    this.spells9 = const [],
+    SpellLevelSection? cantrips,
+    SpellLevelSection? spells1,
+    SpellLevelSection? spells2,
+    SpellLevelSection? spells3,
+    SpellLevelSection? spells4,
+    SpellLevelSection? spells5,
+    SpellLevelSection? spells6,
+    SpellLevelSection? spells7,
+    SpellLevelSection? spells8,
+    SpellLevelSection? spells9,
     this.sessionNotes = "",
-  });
+  }): attacks = attacks ?? [],
+      cantrips = cantrips ?? SpellLevelSection(),
+      spells1 = spells1 ?? SpellLevelSection(),
+      spells2 = spells2 ?? SpellLevelSection(),
+      spells3 = spells3 ?? SpellLevelSection(),
+      spells4 = spells4 ?? SpellLevelSection(),
+      spells5 = spells5 ?? SpellLevelSection(),
+      spells6 = spells6 ?? SpellLevelSection(),
+      spells7 = spells7 ?? SpellLevelSection(),
+      spells8 = spells8 ?? SpellLevelSection(),
+      spells9 = spells9 ?? SpellLevelSection();
+
+    
+  factory DNDCharacter.fromJson(Map<String, dynamic> json) =>
+    _$DNDCharacterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DNDCharacterToJson(this);
+
+  DNDCharacter copy() {
+    return DNDCharacter.fromJson(toJson());
+  }
 }
