@@ -8,10 +8,6 @@ class DNDCharacter {
   String background;
   String alignment;
 
-  String inspiration;
-  String proficiencyBonus;
-  String passivePerception;
-
   // Ability Scores
   String strength;
   String strMod;
@@ -54,6 +50,13 @@ class DNDCharacter {
   bool stealthProf;
   bool survivalProf;
 
+  String inspiration;
+  String proficiencyBonus;
+  String passivePerception;
+
+  String proficiencies;
+  String featuresTraits;
+
   String armorClass;
   String initiative;
   String speed;
@@ -71,6 +74,9 @@ class DNDCharacter {
   bool failure2;
   bool failure3;
 
+  // Hit Dice
+  String hitDiceTotal;
+  String hitDiceCurr;
 
   // Character Flavor
   String personalityTraits;
@@ -83,6 +89,7 @@ class DNDCharacter {
   String eyes;
   String skin;
   String hair;
+  String backstory;
 
 
   // Equipment
@@ -91,7 +98,7 @@ class DNDCharacter {
   String ep;
   String gp;
   String pp;
-  String equipment;
+  String inventory;
 
 
   // Spellcasting
@@ -110,6 +117,8 @@ class DNDCharacter {
   List <Spell> spells7;
   List <Spell> spells8;
   List <Spell> spells9;
+
+  String sessionNotes;
 
   DNDCharacter({
     this.name = "",
@@ -159,10 +168,14 @@ class DNDCharacter {
     this.survivalProf = false,
     this.armorClass = "",
     this.initiative = "",
+    this.proficiencies = "",
+    this.featuresTraits = "",
     this.speed = "",
     this.hpCurr = "",
     this.hpMax = "",
     this.hpTemp = "",
+    this.hitDiceCurr = "",
+    this.hitDiceTotal = "",
     this.success1 = false,
     this.success2 = false,
     this.success3 = false,
@@ -179,12 +192,13 @@ class DNDCharacter {
     this.eyes = "",
     this.skin = "",
     this.hair = "",
+    this.backstory = "",
     this.cp = "",
     this.sp = "",
     this.ep = "",
     this.gp = "",
     this.pp = "",
-    this.equipment = "",
+    this.inventory = "",
     this.spellAttackBonus = "",
     this.spellSaveDC = "",
     this.spellcastingAbility = "",
@@ -199,5 +213,6 @@ class DNDCharacter {
     this.spells7 = const [],
     this.spells8 = const [],
     this.spells9 = const [],
+    this.sessionNotes = "",
   });
 }

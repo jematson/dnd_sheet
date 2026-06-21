@@ -39,7 +39,7 @@ class LabeledField extends StatelessWidget {
       textAlign: align,
       style: TextStyle(fontSize: size),
       controller: controller,
-      minLines: multiline ? 4 : 1,
+      minLines: multiline ? 2 : 1,
       maxLines: multiline ? null : 1,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),

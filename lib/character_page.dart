@@ -16,18 +16,19 @@ class CharacterPage extends StatefulWidget {
 
 class _CharacterPageState extends State<CharacterPage> {
   late DNDCharacter character;
+  late DNDCharacter editedCharacter;
 
-
+  final nameController = TextEditingController();
+  final levelController = TextEditingController();
 
 
   @override
   void initState() {
     super.initState();
     character = widget.character;
+    editedCharacter = widget.character; // MAKE DEEP COPY
   }
 
-  final nameController = TextEditingController();
-  final levelController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -166,9 +167,8 @@ class _CharacterPageState extends State<CharacterPage> {
                                 ),
                               ]
                             ),
-                            ValueBox.square(label: "INSPIRATION", position: .right),
-                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right),
-                            ValueBox.square(label: "PASSIVE PERCEPTION", position: .right)
+
+                            ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true,)
                           ]
                         )
                       ),
@@ -209,7 +209,22 @@ class _CharacterPageState extends State<CharacterPage> {
                               ),
                             ),
 
-                            SavesBox(),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: CardSection(
+                                    child: Column(
+                                      spacing: 5,
+                                      children: [
+                                        LabeledField(label: "TOTAL", position: .left, size: 10),
+                                        LabeledField(label: "HIT DICE", position: .bottom, size: 14, align: .center)
+                                      ]
+                                    )
+                                  ),
+                                ),
+                                SavesBox(),
+                              ],
+                            ),
 
                             CardSection(
                               child: AttackSection()
@@ -229,7 +244,7 @@ class _CharacterPageState extends State<CharacterPage> {
                                       Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center)),
                                     ]
                                   ),
-                                  LabeledField(label: "EQUIPMENT", position: .bottom, multiline: true)
+                                  LabeledField(label: "INVENTORY", position: .bottom, multiline: true)
                                 ],
                               )
                             ),
@@ -242,12 +257,11 @@ class _CharacterPageState extends State<CharacterPage> {
                       // Third Column
                       Expanded(
                         child: Column(
-                          mainAxisAlignment: .start,
+                          crossAxisAlignment: .start,
                           children: [
-                            ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true),
-                            ValueBox(label: "IDEALS", position: .bottom, multiline: true),
-                            ValueBox(label: "BONDS", position: .bottom, multiline: true),
-                            ValueBox(label: "FLAWS", position: .bottom, multiline: true),
+                            ValueBox.square(label: "INSPIRATION", position: .right),
+                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right),
+                            ValueBox.square(label: "PASSIVE PERCEPTION", position: .right),
                             ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true),
                           ]
                         )
@@ -315,6 +329,57 @@ class _CharacterPageState extends State<CharacterPage> {
                     ]
                   ),
               
+                  // Character Info Section
+                  Row(
+                    crossAxisAlignment: .start,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            ValueBox(label: "BACKSTORY", position: .top, multiline: true)
+                          ]
+                        ),
+                      ),
+
+                      Expanded(
+                        child: Column(
+                          children: [
+                            CardSection(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    spacing: 5,
+                                    children: [
+                                      Expanded(child: LabeledField(label: "AGE", position: .bottom)),
+                                      Expanded(child: LabeledField(label: "HEIGHT", position: .bottom)),
+                                      Expanded(child: LabeledField(label: "WEIGHT", position: .bottom)),
+                                    ]
+                                  ),
+                                  Row(
+                                    spacing: 5,
+                                    children: [
+                                      Expanded(child: LabeledField(label: "EYES", position: .bottom)),
+                                      Expanded(child: LabeledField(label: "SKIN", position: .bottom)),
+                                      Expanded(child: LabeledField(label: "HAIR", position: .bottom)),
+                                    ]
+                                  ),
+                                ]
+                              )
+                            ),
+                            ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true),
+                            ValueBox(label: "IDEALS", position: .bottom, multiline: true),
+                            ValueBox(label: "BONDS", position: .bottom, multiline: true),
+                            ValueBox(label: "FLAWS", position: .bottom, multiline: true),
+                          ]
+                        ),
+                      ),
+
+                    ]
+                  ),
+
+                  ValueBox(label: "SESSION NOTES", position: .top, multiline: true,)
+
+                  // END OF CHARACTER SHEET
                 ]
               ),
             ),
