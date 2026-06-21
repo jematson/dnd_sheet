@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import './classes.dart';
+import './widgets.dart';
 
 class SkillLine extends StatefulWidget {
   const SkillLine({

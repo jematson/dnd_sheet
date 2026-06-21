@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'classes/classes.dart';
+import 'widgets/widgets.dart';
 
 void main() {
   runApp(const MainApp());
@@ -189,7 +190,7 @@ class MainApp extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                
+
                                 SavesBox(),
 
                                 CardSection(

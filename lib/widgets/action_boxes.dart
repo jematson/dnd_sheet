@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../classes/attack.dart';
 
-
-class Attack {
-  String name;
-  String bonus;
-  String damage;
-
-  Attack({
-    this.name = "",
-    this.bonus = "",
-    this.damage = "",
-  });
-}
 
 
 class AttackLine extends StatefulWidget {
