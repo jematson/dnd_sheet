@@ -13,6 +13,7 @@ class LabeledField extends StatelessWidget {
     this.multiline = false,
     this.size = 14,
     this.align = .start,
+    this.maxLines = 2,
     this.controller,
   });
 
@@ -23,6 +24,7 @@ class LabeledField extends StatelessWidget {
     this.multiline = false,
     this.size = 16,
     this.align = .start,
+    this.maxLines = 2,
     this.controller,
   }) : square = true;
 
@@ -32,6 +34,7 @@ class LabeledField extends StatelessWidget {
   final bool multiline;
   final double size;
   final TextAlign align;
+  final int maxLines;
   final TextEditingController? controller;
 
   Widget _field() {
@@ -39,7 +42,7 @@ class LabeledField extends StatelessWidget {
       textAlign: align,
       style: TextStyle(fontSize: size),
       controller: controller,
-      minLines: multiline ? 2 : 1,
+      minLines: multiline ? maxLines : 1,
       maxLines: multiline ? null : 1,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
@@ -126,6 +129,7 @@ class ValueBox extends StatelessWidget {
     this.multiline = false,
     this.size = 16,
     this.align = .start,
+    this.maxLines = 2,
     this.controller,
   });
 
@@ -136,6 +140,7 @@ class ValueBox extends StatelessWidget {
     this.multiline = false,
     this.size = 16,
     this.align = .start,
+    this.maxLines = 2,
     this.controller,
   }) : square = true;
 
@@ -145,6 +150,7 @@ class ValueBox extends StatelessWidget {
   final bool multiline;
   final double size;
   final TextAlign align;
+  final int maxLines;
   final TextEditingController? controller;
 
   @override
@@ -157,6 +163,7 @@ class ValueBox extends StatelessWidget {
         multiline: multiline,
         size: size,
         align: align,
+        maxLines: maxLines,
         controller: controller,
       ),
     );

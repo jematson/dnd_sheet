@@ -168,7 +168,7 @@ class _CharacterPageState extends State<CharacterPage> {
                               ]
                             ),
 
-                            ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true,)
+                            ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true, maxLines: 4)
                           ]
                         )
                       ),
@@ -244,7 +244,7 @@ class _CharacterPageState extends State<CharacterPage> {
                                       Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center)),
                                     ]
                                   ),
-                                  LabeledField(label: "INVENTORY", position: .bottom, multiline: true)
+                                  LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24)
                                 ],
                               )
                             ),
@@ -262,7 +262,7 @@ class _CharacterPageState extends State<CharacterPage> {
                             ValueBox.square(label: "INSPIRATION", position: .right),
                             ValueBox.square(label: "PROFICIENCY BONUS", position: .right),
                             ValueBox.square(label: "PASSIVE PERCEPTION", position: .right),
-                            ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true),
+                            ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30),
                           ]
                         )
                       )
@@ -336,7 +336,7 @@ class _CharacterPageState extends State<CharacterPage> {
                       Expanded(
                         child: Column(
                           children: [
-                            ValueBox(label: "BACKSTORY", position: .top, multiline: true)
+                            ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19)
                           ]
                         ),
                       ),
@@ -377,7 +377,7 @@ class _CharacterPageState extends State<CharacterPage> {
                     ]
                   ),
 
-                  ValueBox(label: "SESSION NOTES", position: .top, multiline: true,)
+                  ValueBox(label: "SESSION NOTES", position: .top, multiline: true, maxLines: 4)
 
                   // END OF CHARACTER SHEET
                 ]
