@@ -26,7 +26,7 @@ class _CharacterPageState extends State<CharacterPage> {
     super.initState();
     character = widget.character;
     editedCharacter = widget.character.copy();
-    cc = CharacterController(character: character);
+    cc = CharacterController(character: editedCharacter);
   }
 
 
@@ -100,12 +100,12 @@ class _CharacterPageState extends State<CharacterPage> {
                                   child: Column(
                                     spacing: 15,
                                     children: [
-                                      AbilityBox(value: "STR", controller: cc.strengthController, modController: cc.strModController),
-                                      AbilityBox(value: "DEX", controller: cc.dexterityController, modController: cc.dexModController),
-                                      AbilityBox(value: "CON", controller: cc.constitutionController, modController: cc.conModController),
-                                      AbilityBox(value: "INT", controller: cc.intelligenceController, modController: cc.intModController,),
-                                      AbilityBox(value: "WIS", controller: cc.wisdomController, modController: cc.wisModController,),
-                                      AbilityBox(value: "CHA", controller: cc.charismaController, modController: cc.chaModController),
+                                      AbilityBox(value: "STR", controller: cc.strength.scoreController, modController: cc.strength.modifierController),
+                                      AbilityBox(value: "DEX", controller: cc.dexterity.scoreController, modController: cc.dexterity.modifierController),
+                                      AbilityBox(value: "CON", controller: cc.constitution.scoreController, modController: cc.constitution.modifierController),
+                                      AbilityBox(value: "INT", controller: cc.intelligence.scoreController, modController: cc.intelligence.modifierController),
+                                      AbilityBox(value: "WIS", controller: cc.wisdom.scoreController, modController: cc.wisdom.modifierController),
+                                      AbilityBox(value: "CHA", controller: cc.charisma.scoreController, modController: cc.charisma.modifierController),
                                     ]
                                   )
                                 ),

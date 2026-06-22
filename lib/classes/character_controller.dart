@@ -12,19 +12,12 @@ class CharacterController {
   late final TextEditingController alignmentController = TextEditingController(text: character.alignment);
   late final TextEditingController backgroundController = TextEditingController(text: character.background);
 
-  late final TextEditingController strengthController = TextEditingController(text: character.strength);
-  late final TextEditingController dexterityController = TextEditingController(text: character.dexterity);
-  late final TextEditingController constitutionController = TextEditingController(text: character.constitution);
-  late final TextEditingController intelligenceController = TextEditingController(text: character.intelligence);
-  late final TextEditingController wisdomController = TextEditingController(text: character.wisdom);
-  late final TextEditingController charismaController = TextEditingController(text: character.charisma);
-
-  late final TextEditingController strModController = TextEditingController();
-  late final TextEditingController dexModController = TextEditingController();
-  late final TextEditingController conModController = TextEditingController();
-  late final TextEditingController intModController = TextEditingController();
-  late final TextEditingController wisModController = TextEditingController();
-  late final TextEditingController chaModController = TextEditingController();
+  late AbilityController strength = AbilityController(update: (){character.strength = strength.scoreController.text;}, initialScore: character.strength);
+  late AbilityController dexterity = AbilityController(update: (){character.dexterity = dexterity.scoreController.text;}, initialScore: character.dexterity);
+  late AbilityController constitution = AbilityController(update: (){character.constitution = constitution.scoreController.text;}, initialScore: character.constitution);
+  late AbilityController intelligence = AbilityController(update: (){character.intelligence = intelligence.scoreController.text;}, initialScore: character.intelligence);
+  late AbilityController wisdom = AbilityController(update: (){character.wisdom = wisdom.scoreController.text;}, initialScore: character.wisdom);
+  late AbilityController charisma = AbilityController(update: (){character.charisma = charisma.scoreController.text;}, initialScore: character.charisma);
 
   late final TextEditingController strSaveController = TextEditingController();
   late final TextEditingController dexSaveController = TextEditingController();
@@ -100,11 +93,40 @@ class CharacterController {
   CharacterController({
     required this.character
   }) {
-    nameController.text = character.name;
+    strength.scoreController.addListener((){_updateAbilityModifier(strength);});
+    dexterity.scoreController.addListener((){_updateAbilityModifier(dexterity);});
+    constitution.scoreController.addListener((){_updateAbilityModifier(constitution);});
+    intelligence.scoreController.addListener((){_updateAbilityModifier(intelligence);});
+    wisdom.scoreController.addListener((){_updateAbilityModifier(wisdom);});
+    charisma.scoreController.addListener((){_updateAbilityModifier(charisma);});
 
   }
 
 
+  void _updateAbilityModifier(AbilityController abilityController) {
+    final score = int.tryParse(abilityController.scoreController.text);
+    if (score != null) {
+      final mod = ((score - 10) / 2).floor();
+      abilityController.modifierController.text = mod < 0 ? mod.toString() : "+${mod.toString()}";
+      abilityController.update();
+    } else {
+      abilityController.modifierController.text = "";
+    }
+  }
+
+}
 
 
+class AbilityController {
+  final scoreController = TextEditingController();
+  final modifierController = TextEditingController();
+  final VoidCallback update;
+  final String initialScore;
+
+  AbilityController({
+    required this.update,
+    required this.initialScore
+  }){
+    scoreController.text = initialScore;
+  }
 }
