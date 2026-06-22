@@ -260,7 +260,7 @@ class _CharacterPageState extends State<CharacterPage> {
                           crossAxisAlignment: .start,
                           children: [
                             ValueBox.square(label: "INSPIRATION", position: .right, controller: cc.inspirationController),
-                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right, controller: cc.proficiencyBonusController),
+                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right, controller: cc.proficiencyBonusController.profBonusController),
                             ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, controller: cc.passivePerceptionController),
                             ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraitsController),
                           ]
