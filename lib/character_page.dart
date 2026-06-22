@@ -390,11 +390,17 @@ class _CharacterPageState extends State<CharacterPage> {
         FloatingActionButton(
           shape: CircleBorder(),
           onPressed: () {
-            Navigator.pop(context, character);
+            Navigator.pop(context, editedCharacter.copy());
           },
           child: Text("SAVE"),
         )
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    cc.dispose();
+    super.dispose();
   }
 }

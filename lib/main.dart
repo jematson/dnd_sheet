@@ -74,13 +74,15 @@ class _HomePageState extends State<HomePage> {
                           width: 450,
                           height: 60,
                           child: OutlinedButton(
-                            onPressed: (){
-                              Navigator.push(
+                            onPressed: () async {
+                              final result = await Navigator.push(
                                 context,
                                 MaterialPageRoute<void>(
                                   builder: (context) => CharacterPage(character: characters[index])
                                 )
                               );
+                              final newChar = result as DNDCharacter;
+                              characters[index] = newChar;
                             }, 
                             child: Text(characters[index].name, style: TextStyle(fontSize: 20))
                           ),
