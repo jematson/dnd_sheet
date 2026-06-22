@@ -42,7 +42,7 @@ class _CharacterPageState extends State<CharacterPage> {
             crossAxisAlignment: .end,
             children: [
               Expanded(
-                child: LabeledField(label: "CHARACTER NAME", position: .bottom, size: 22, controller: cc.nameController)
+                child: LabeledField(label: "CHARACTER NAME", position: .bottom, size: 22, controller: cc.name.valueController)
               ),
               Expanded(
                 child: Column(
@@ -50,9 +50,9 @@ class _CharacterPageState extends State<CharacterPage> {
                     Row(
                       spacing: 10,
                       children: [
-                        LabeledField.square(label: "LEVEL", position: .bottom, align: .center, controller: cc.levelController),
+                        LabeledField.square(label: "LEVEL", position: .bottom, align: .center, controller: cc.level.valueController),
                         Expanded(
-                          child: LabeledField(label: "CLASS", position: .bottom, controller: cc.classController)
+                          child: LabeledField(label: "CLASS", position: .bottom, controller: cc.className.valueController)
                         ),
                       ],
                     ),
@@ -60,13 +60,13 @@ class _CharacterPageState extends State<CharacterPage> {
                       spacing: 10,
                       children: [
                         Expanded(
-                          child: LabeledField(label: "RACE", position: .bottom, controller: cc.raceController)
+                          child: LabeledField(label: "RACE", position: .bottom, controller: cc.race.valueController)
                         ),
                         Expanded(
-                          child: LabeledField(label: "ALIGNMENT", position: .bottom, controller: cc.alignmentController)
+                          child: LabeledField(label: "ALIGNMENT", position: .bottom, controller: cc.alignment.valueController)
                         ),
                         Expanded(
-                          child: LabeledField(label: "BACKGROUND", position: .bottom, controller: cc.backgroundController)
+                          child: LabeledField(label: "BACKGROUND", position: .bottom, controller: cc.background.valueController)
                         ),
                       ],
                     )
@@ -168,7 +168,7 @@ class _CharacterPageState extends State<CharacterPage> {
                               ]
                             ),
 
-                            ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true, maxLines: 4, controller: cc.proficienciesController)
+                            ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true, maxLines: 4, controller: cc.proficiencies.valueController)
                           ]
                         )
                       ),
@@ -181,9 +181,9 @@ class _CharacterPageState extends State<CharacterPage> {
                             Row(
                               mainAxisAlignment: .center,
                               children: [
-                                ValueBox.square(label: "AC", position: .bottom, align: .center, controller: cc.acController),
-                                ValueBox.square(label: "INITIATIVE", position: .bottom, align: .center, controller: cc.initiativeController),
-                                ValueBox.square(label: "SPEED", position: .bottom, align: .center, controller: cc.speedController),
+                                ValueBox.square(label: "AC", position: .bottom, align: .center, controller: cc.ac.valueController),
+                                ValueBox.square(label: "INITIATIVE", position: .bottom, align: .center, controller: cc.initiative.valueController),
+                                ValueBox.square(label: "SPEED", position: .bottom, align: .center, controller: cc.speed.valueController),
                               ],
                             ),
                             CardSection(
@@ -195,13 +195,13 @@ class _CharacterPageState extends State<CharacterPage> {
                                     spacing: 10,
                                     children: [
                                       Expanded(
-                                        child: LabeledField(label: "MAX", position: .bottom, align: .center, controller: cc.hpMaxController)
+                                        child: LabeledField(label: "MAX", position: .bottom, align: .center, controller: cc.hpMax.valueController)
                                       ),
                                       Expanded(
-                                        child: LabeledField(label: "CURRENT", position: .bottom, align: .center, controller: cc.hpCurrController)
+                                        child: LabeledField(label: "CURRENT", position: .bottom, align: .center, controller: cc.hpCurr.valueController)
                                       ),
                                       Expanded(
-                                        child: LabeledField(label: "TEMP", position: .bottom, align: .center, controller: cc.hpTempController)
+                                        child: LabeledField(label: "TEMP", position: .bottom, align: .center, controller: cc.hpTemp.valueController)
                                       ),
                                     ],
                                   ),
@@ -216,8 +216,8 @@ class _CharacterPageState extends State<CharacterPage> {
                                     child: Column(
                                       spacing: 5,
                                       children: [
-                                        LabeledField(label: "TOTAL", position: .left, size: 10, controller: cc.hitDiceTotalController),
-                                        LabeledField(label: "HIT DICE", position: .bottom, size: 14, align: .center, controller: cc.hitDiceCurrController)
+                                        LabeledField(label: "TOTAL", position: .left, size: 10, controller: cc.hitDiceTotal.valueController),
+                                        LabeledField(label: "HIT DICE", position: .bottom, size: 14, align: .center, controller: cc.hitDiceCurr.valueController)
                                       ]
                                     )
                                   ),
@@ -237,14 +237,14 @@ class _CharacterPageState extends State<CharacterPage> {
                                   Row(
                                     spacing: 5,
                                     children: [
-                                      Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center, controller: cc.cpController)),
-                                      Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center, controller: cc.spController)),
-                                      Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center, controller: cc.epController)),
-                                      Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center, controller: cc.gpController)),
-                                      Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center, controller: cc.ppController)),
+                                      Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center, controller: cc.cp.valueController)),
+                                      Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center, controller: cc.sp.valueController)),
+                                      Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center, controller: cc.ep.valueController)),
+                                      Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center, controller: cc.gp.valueController)),
+                                      Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center, controller: cc.pp.valueController)),
                                     ]
                                   ),
-                                  LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24, controller: cc.inventoryController)
+                                  LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24, controller: cc.inventory.valueController)
                                 ],
                               )
                             ),
@@ -259,10 +259,10 @@ class _CharacterPageState extends State<CharacterPage> {
                         child: Column(
                           crossAxisAlignment: .start,
                           children: [
-                            ValueBox.square(label: "INSPIRATION", position: .right, controller: cc.inspirationController),
-                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right, controller: cc.proficiencyBonusController.profBonusController),
-                            ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, controller: cc.passivePerceptionController),
-                            ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraitsController),
+                            ValueBox.square(label: "INSPIRATION", position: .right, controller: cc.inspiration.valueController),
+                            ValueBox.square(label: "PROFICIENCY BONUS", position: .right, controller: cc.proficiencyBonus.profBonusController),
+                            ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, controller: cc.passivePerception.valueController),
+                            ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraits.valueController),
                           ]
                         )
                       )
@@ -274,19 +274,19 @@ class _CharacterPageState extends State<CharacterPage> {
                   Row(      // Spellcasting Header
                     children: [
                       Expanded(
-                        child: ValueBox(label: "SPELLCASTING CLASS", position: .bottom, controller: cc.spellcastingClassController)
+                        child: ValueBox(label: "SPELLCASTING CLASS", position: .bottom, controller: cc.spellcastingClass.valueController)
                       ),
                       Expanded(
                         child: Row(
                           children: [
                             Expanded(
-                              child: ValueBox(label: "SPELLCASTING ABILITY", position: .bottom, controller: cc.spellcastingAbilityController)
+                              child: ValueBox(label: "SPELLCASTING ABILITY", position: .bottom, controller: cc.spellcastingAbility.valueController)
                             ),
                             Expanded(
-                              child: ValueBox(label: "SPELL SAVE DC", position: .bottom, controller: cc.spellSaveDCController)
+                              child: ValueBox(label: "SPELL SAVE DC", position: .bottom, controller: cc.spellSaveDC.valueController)
                             ),
                             Expanded(
-                              child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom, controller: cc.spellAttackBonusController)
+                              child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom, controller: cc.spellAttackBonus.valueController)
                             ),
                           ],
                         ),
@@ -336,7 +336,7 @@ class _CharacterPageState extends State<CharacterPage> {
                       Expanded(
                         child: Column(
                           children: [
-                            ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19, controller: cc.backstoryController)
+                            ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19, controller: cc.backstory.valueController)
                           ]
                         ),
                       ),
@@ -350,26 +350,26 @@ class _CharacterPageState extends State<CharacterPage> {
                                   Row(
                                     spacing: 5,
                                     children: [
-                                      Expanded(child: LabeledField(label: "AGE", position: .bottom, controller: cc.ageController)),
-                                      Expanded(child: LabeledField(label: "HEIGHT", position: .bottom, controller: cc.heightController)),
-                                      Expanded(child: LabeledField(label: "WEIGHT", position: .bottom, controller: cc.weightController)),
+                                      Expanded(child: LabeledField(label: "AGE", position: .bottom, controller: cc.age.valueController)),
+                                      Expanded(child: LabeledField(label: "HEIGHT", position: .bottom, controller: cc.height.valueController)),
+                                      Expanded(child: LabeledField(label: "WEIGHT", position: .bottom, controller: cc.weight.valueController)),
                                     ]
                                   ),
                                   Row(
                                     spacing: 5,
                                     children: [
-                                      Expanded(child: LabeledField(label: "EYES", position: .bottom, controller: cc.eyesController)),
-                                      Expanded(child: LabeledField(label: "SKIN", position: .bottom, controller: cc.skinController)),
-                                      Expanded(child: LabeledField(label: "HAIR", position: .bottom, controller: cc.hairController)),
+                                      Expanded(child: LabeledField(label: "EYES", position: .bottom, controller: cc.eyes.valueController)),
+                                      Expanded(child: LabeledField(label: "SKIN", position: .bottom, controller: cc.skin.valueController)),
+                                      Expanded(child: LabeledField(label: "HAIR", position: .bottom, controller: cc.hair.valueController)),
                                     ]
                                   ),
                                 ]
                               )
                             ),
-                            ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true, controller: cc.personalityTraitsController),
-                            ValueBox(label: "IDEALS", position: .bottom, multiline: true, controller: cc.idealsController),
-                            ValueBox(label: "BONDS", position: .bottom, multiline: true, controller: cc.bondsController),
-                            ValueBox(label: "FLAWS", position: .bottom, multiline: true, controller: cc.flawsController),
+                            ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true, controller: cc.personalityTraits.valueController),
+                            ValueBox(label: "IDEALS", position: .bottom, multiline: true, controller: cc.ideals.valueController),
+                            ValueBox(label: "BONDS", position: .bottom, multiline: true, controller: cc.bonds.valueController),
+                            ValueBox(label: "FLAWS", position: .bottom, multiline: true, controller: cc.flaws.valueController),
                           ]
                         ),
                       ),
@@ -377,7 +377,7 @@ class _CharacterPageState extends State<CharacterPage> {
                     ]
                   ),
 
-                  ValueBox(label: "SESSION NOTES", position: .top, multiline: true, maxLines: 4, controller: cc.sessionNotesController)
+                  ValueBox(label: "SESSION NOTES", position: .top, multiline: true, maxLines: 4, controller: cc.sessionNotes.valueController)
 
                   // END OF CHARACTER SHEET
                 ]

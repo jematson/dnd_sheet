@@ -81,8 +81,10 @@ class _HomePageState extends State<HomePage> {
                                   builder: (context) => CharacterPage(character: characters[index])
                                 )
                               );
-                              final newChar = result as DNDCharacter;
-                              characters[index] = newChar;
+                              setState(() {
+                                final newChar = result as DNDCharacter;
+                                characters[index] = newChar;
+                              });
                             }, 
                             child: Text(characters[index].name, style: TextStyle(fontSize: 20))
                           ),
@@ -136,13 +138,17 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 200),
                 child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.push(
+                  onPressed: () async {
+                    final result = await Navigator.push(
                       context,
                       MaterialPageRoute<void>(
                         builder: (context) => CharacterPage(character: DNDCharacter())
                       )
                     );
+                    setState(() {
+                      final newChar = result as DNDCharacter;
+                      characters.add(newChar);
+                    });
                   }, 
                   child: Text("NEW CHARACTER")
                 ),

@@ -6,12 +6,12 @@ import 'dnd_character.dart';
 class CharacterController {
   final DNDCharacter character;
 
-  late final TextEditingController nameController = TextEditingController(text: character.name);
-  late final TextEditingController levelController = TextEditingController(text: character.level);
-  late final TextEditingController classController = TextEditingController(text: character.className);
-  late final TextEditingController raceController = TextEditingController(text: character.race);
-  late final TextEditingController alignmentController = TextEditingController(text: character.alignment);
-  late final TextEditingController backgroundController = TextEditingController(text: character.background);
+  late ValueController name = ValueController(initialValue: character.name, update: (v){character.name = v.valueController.text;});
+  late ValueController level = ValueController(initialValue: character.level, update: (v){character.level = v.valueController.text;});
+  late ValueController className = ValueController(initialValue: character.className, update: (v){character.className = v.valueController.text;});
+  late ValueController race = ValueController(initialValue: character.race, update: (v){character.race = v.valueController.text;});
+  late ValueController alignment = ValueController(initialValue: character.alignment, update: (v){character.alignment = v.valueController.text;});
+  late ValueController background = ValueController(initialValue: character.background, update: (v){character.background = v.valueController.text;});
 
   late AbilityController strength = AbilityController(update: (ability){character.strength = ability.scoreController.text;}, initialScore: character.strength);
   late AbilityController dexterity = AbilityController(update: (ability){character.dexterity = ability.scoreController.text;}, initialScore: character.dexterity);
@@ -24,171 +24,171 @@ class CharacterController {
     initialProficiency: character.strProf, 
     update: (skill){character.strProf = skill.isProficient.value;}, 
     abilityModController: strength.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController dexSave = SkillController(
     initialProficiency: character.dexProf, 
     update: (skill){character.dexProf = skill.isProficient.value;}, 
     abilityModController: dexterity.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController conSave = SkillController(
     initialProficiency: character.conProf, 
     update: (skill){character.conProf = skill.isProficient.value;}, 
     abilityModController: constitution.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController intSave = SkillController(
     initialProficiency: character.intProf, 
     update: (skill){character.intProf = skill.isProficient.value;}, 
     abilityModController: intelligence.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController wisSave = SkillController(
     initialProficiency: character.wisProf, 
     update: (skill){character.wisProf = skill.isProficient.value;}, 
     abilityModController: wisdom.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController chaSave = SkillController(
     initialProficiency: character.chaProf, 
     update: (skill){character.chaProf = skill.isProficient.value;}, 
     abilityModController: charisma.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
 
   late SkillController acrobatics = SkillController(
     initialProficiency: character.acrobaticsProf, 
     update: (skill){character.acrobaticsProf = skill.isProficient.value;}, 
     abilityModController: dexterity.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController animalHandling = SkillController(
     initialProficiency: character.animalHandlingProf, 
     update: (skill){character.animalHandlingProf = skill.isProficient.value;}, 
     abilityModController: wisdom.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController arcana = SkillController(
     initialProficiency: character.arcanaProf, 
     update: (skill){character.arcanaProf = skill.isProficient.value;}, 
     abilityModController: intelligence.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController athletics  = SkillController(
     initialProficiency: character.athleticsProf, 
     update: (skill){character.athleticsProf = skill.isProficient.value;}, 
     abilityModController: strength.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController deception  = SkillController(
     initialProficiency: character.deceptionProf, 
     update: (skill){character.deceptionProf = skill.isProficient.value;}, 
     abilityModController: charisma.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController history  = SkillController(
     initialProficiency: character.historyProf, 
     update: (skill){character.historyProf = skill.isProficient.value;}, 
     abilityModController: intelligence.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController insight  = SkillController(
     initialProficiency: character.insightProf, 
     update: (skill){character.insightProf = skill.isProficient.value;}, 
     abilityModController: wisdom.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController intimidation  = SkillController(
     initialProficiency: character.intimidationProf, 
     update: (skill){character.intimidationProf = skill.isProficient.value;}, 
     abilityModController: charisma.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController investigation  = SkillController(
     initialProficiency: character.investigationProf, 
     update: (skill){character.investigationProf = skill.isProficient.value;}, 
     abilityModController: intelligence.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController medicine  = SkillController(
     initialProficiency: character.medicineProf, 
     update: (skill){character.medicineProf = skill.isProficient.value;}, 
     abilityModController: wisdom.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController nature  = SkillController(
     initialProficiency: character.natureProf, 
     update: (skill){character.natureProf = skill.isProficient.value;}, 
     abilityModController: wisdom.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController perception  = SkillController(
     initialProficiency: character.perceptionProf, 
     update: (skill){character.perceptionProf = skill.isProficient.value;}, 
     abilityModController: wisdom.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController performance  = SkillController(
     initialProficiency: character.performanceProf, 
     update: (skill){character.performanceProf = skill.isProficient.value;}, 
     abilityModController: charisma.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController persuasion  = SkillController(
     initialProficiency: character.persuasionProf, 
     update: (skill){character.persuasionProf = skill.isProficient.value;}, 
     abilityModController: charisma.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController religion  = SkillController(
     initialProficiency: character.religionProf, 
     update: (skill){character.religionProf = skill.isProficient.value;}, 
     abilityModController: intelligence.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController sleightOfHand  = SkillController(
     initialProficiency: character.sleightOfHandProf, 
     update: (skill){character.sleightOfHandProf = skill.isProficient.value;}, 
     abilityModController: dexterity.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController stealth  = SkillController(
     initialProficiency: character.stealthProf, 
     update: (skill){character.stealthProf = skill.isProficient.value;}, 
     abilityModController: dexterity.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
   late SkillController survival = SkillController(
     initialProficiency: character.survivalProf, 
     update: (skill){character.survivalProf = skill.isProficient.value;}, 
     abilityModController: wisdom.modifierController, 
-    proficiencyController: proficiencyBonusController.profBonusController);
+    proficiencyController: proficiencyBonus.profBonusController);
 
 
-  late final ProficiencyController proficiencyBonusController = ProficiencyController(
-    levelController: levelController, 
+  late final ProficiencyController proficiencyBonus = ProficiencyController(
+    levelController: level.valueController, 
     initialValue: character.proficiencyBonus, 
     update: (prof){character.proficiencyBonus = prof.profBonusController.text;});
-  late final TextEditingController passivePerceptionController = TextEditingController(text: character.passivePerception);
-  late final TextEditingController inspirationController = TextEditingController(text: character.inspiration);
+  late ValueController passivePerception = ValueController(initialValue: character.passivePerception, update: (v){character.passivePerception = v.valueController.text;});
+  late ValueController inspiration = ValueController(initialValue: character.inspiration, update: (v){character.inspiration = v.valueController.text;});
 
-  late final TextEditingController acController = TextEditingController(text: character.armorClass);
-  late final TextEditingController initiativeController = TextEditingController(text: character.initiative);
-  late final TextEditingController speedController = TextEditingController(text: character.speed);
+  late ValueController ac = ValueController(initialValue: character.armorClass, update: (v){character.armorClass = v.valueController.text;});
+  late ValueController initiative = ValueController(initialValue: character.initiative, update: (v){character.initiative = v.valueController.text;});
+  late ValueController speed = ValueController(initialValue: character.speed, update: (v){character.speed = v.valueController.text;});
 
-  late final TextEditingController hpMaxController = TextEditingController(text: character.hpMax);
-  late final TextEditingController hpCurrController = TextEditingController(text: character.hpCurr);
-  late final TextEditingController hpTempController = TextEditingController(text: character.hpTemp);
+  late ValueController hpMax = ValueController(initialValue: character.hpMax, update: (v){character.hpMax = v.valueController.text;});
+  late ValueController hpCurr = ValueController(initialValue: character.hpCurr, update: (v){character.hpCurr = v.valueController.text;});
+  late ValueController hpTemp = ValueController(initialValue: character.hpTemp, update: (v){character.hpTemp = v.valueController.text;});
 
-  late final TextEditingController hitDiceTotalController = TextEditingController(text: character.hitDiceTotal);
-  late final TextEditingController hitDiceCurrController = TextEditingController(text: character.hitDiceCurr);
+  late ValueController hitDiceTotal = ValueController(initialValue: character.hitDiceTotal, update: (v){character.hitDiceTotal = v.valueController.text;});
+  late ValueController hitDiceCurr = ValueController(initialValue: character.hitDiceCurr, update: (v){character.hitDiceCurr = v.valueController.text;});
 
-  late final TextEditingController cpController = TextEditingController(text: character.cp);
-  late final TextEditingController spController = TextEditingController(text: character.sp);
-  late final TextEditingController epController = TextEditingController(text: character.ep);
-  late final TextEditingController gpController = TextEditingController(text: character.gp);
-  late final TextEditingController ppController = TextEditingController(text: character.pp);
-  late final TextEditingController inventoryController = TextEditingController(text: character.inventory);
+  late ValueController cp = ValueController(initialValue: character.cp, update: (v){character.cp = v.valueController.text;});
+  late ValueController sp = ValueController(initialValue: character.sp, update: (v){character.sp = v.valueController.text;});
+  late ValueController ep = ValueController(initialValue: character.ep, update: (v){character.ep = v.valueController.text;});
+  late ValueController gp = ValueController(initialValue: character.gp, update: (v){character.gp = v.valueController.text;});
+  late ValueController pp = ValueController(initialValue: character.pp, update: (v){character.pp = v.valueController.text;});
+  late ValueController inventory = ValueController(initialValue: character.inventory, update: (v){character.inventory = v.valueController.text;});
 
-  late final TextEditingController proficienciesController = TextEditingController(text: character.proficiencies);
-  late final TextEditingController featuresTraitsController = TextEditingController(text: character.featuresTraits);
+  late ValueController proficiencies = ValueController(initialValue: character.proficiencies, update: (v){character.proficiencies = v.valueController.text;});
+  late ValueController featuresTraits = ValueController(initialValue: character.featuresTraits, update: (v){character.featuresTraits = v.valueController.text;});
 
-  late final TextEditingController spellcastingClassController = TextEditingController(text: character.spellcastingClass);
-  late final TextEditingController spellcastingAbilityController = TextEditingController(text: character.spellcastingAbility);
-  late final TextEditingController spellSaveDCController = TextEditingController(text: character.spellSaveDC);
-  late final TextEditingController spellAttackBonusController = TextEditingController(text: character.spellAttackBonus);
+  late ValueController spellcastingClass = ValueController(initialValue: character.spellcastingClass, update: (v){character.spellcastingClass = v.valueController.text;});
+  late ValueController spellcastingAbility = ValueController(initialValue: character.spellcastingAbility, update: (v){character.spellcastingAbility = v.valueController.text;});
+  late ValueController spellSaveDC = ValueController(initialValue: character.spellSaveDC, update: (v){character.spellSaveDC = v.valueController.text;});
+  late ValueController spellAttackBonus = ValueController(initialValue: character.spellAttackBonus, update: (v){character.spellAttackBonus = v.valueController.text;});
 
-  late final TextEditingController backstoryController = TextEditingController(text: character.backstory);
-  late final TextEditingController ageController = TextEditingController(text: character.age);
-  late final TextEditingController heightController = TextEditingController(text: character.height);
-  late final TextEditingController weightController = TextEditingController(text: character.weight);
-  late final TextEditingController eyesController = TextEditingController(text: character.eyes);
-  late final TextEditingController skinController = TextEditingController(text: character.skin);
-  late final TextEditingController hairController = TextEditingController(text: character.hair);
-  late final TextEditingController personalityTraitsController = TextEditingController(text: character.personalityTraits);
-  late final TextEditingController idealsController = TextEditingController(text: character.ideals);
-  late final TextEditingController bondsController = TextEditingController(text: character.bonds);
-  late final TextEditingController flawsController = TextEditingController(text: character.flaws);
+  late ValueController backstory = ValueController(initialValue: character.backstory, update: (v){character.backstory = v.valueController.text;});
+  late ValueController age = ValueController(initialValue: character.age, update: (v){character.age = v.valueController.text;});
+  late ValueController height = ValueController(initialValue: character.height, update: (v){character.height = v.valueController.text;});
+  late ValueController weight = ValueController(initialValue: character.weight, update: (v){character.weight = v.valueController.text;});
+  late ValueController eyes = ValueController(initialValue: character.eyes, update: (v){character.eyes = v.valueController.text;});
+  late ValueController skin = ValueController(initialValue: character.skin, update: (v){character.skin = v.valueController.text;});
+  late ValueController hair = ValueController(initialValue: character.hair, update: (v){character.hair = v.valueController.text;});
+  late ValueController personalityTraits = ValueController(initialValue: character.personalityTraits, update: (v){character.personalityTraits = v.valueController.text;});
+  late ValueController ideals = ValueController(initialValue: character.ideals, update: (v){character.ideals = v.valueController.text;});
+  late ValueController bonds = ValueController(initialValue: character.bonds, update: (v){character.bonds = v.valueController.text;});
+  late ValueController flaws = ValueController(initialValue: character.flaws, update: (v){character.flaws = v.valueController.text;});
 
-  late final TextEditingController sessionNotesController = TextEditingController(text: character.sessionNotes);
+  late ValueController sessionNotes = ValueController(initialValue: character.sessionNotes, update: (v){character.sessionNotes = v.valueController.text;});
 
 
   CharacterController({
@@ -196,12 +196,12 @@ class CharacterController {
   });
 
   void dispose() {
-    nameController.dispose();
-    levelController.dispose();
-    classController.dispose();
-    raceController.dispose();
-    alignmentController.dispose();
-    backgroundController.dispose();
+    name.dispose();
+    level.dispose();
+    className.dispose();
+    race.dispose();
+    alignment.dispose();
+    background.dispose();
 
     strength.dispose();
     dexterity.dispose();
@@ -236,50 +236,70 @@ class CharacterController {
     stealth.dispose();
     survival.dispose();
     
-    proficiencyBonusController.dispose();
-    passivePerceptionController.dispose();
-    inspirationController.dispose();
+    proficiencyBonus.dispose();
+    passivePerception.dispose();
+    inspiration.dispose();
     
-    acController.dispose();
-    initiativeController.dispose();
-    speedController.dispose();
+    ac.dispose();
+    initiative.dispose();
+    speed.dispose();
     
-    hpCurrController.dispose();
-    hpMaxController.dispose();
-    hpTempController.dispose();
+    hpCurr.dispose();
+    hpMax.dispose();
+    hpTemp.dispose();
     
-    hitDiceCurrController.dispose();
-    hitDiceTotalController.dispose();
+    hitDiceCurr.dispose();
+    hitDiceTotal.dispose();
     
-    cpController.dispose();
-    spController.dispose();
-    epController.dispose();
-    gpController.dispose();
-    ppController.dispose();
-    inventoryController.dispose();
+    cp.dispose();
+    sp.dispose();
+    ep.dispose();
+    gp.dispose();
+    pp.dispose();
+    inventory.dispose();
     
-    proficienciesController.dispose();
-    featuresTraitsController.dispose();
+    proficiencies.dispose();
+    featuresTraits.dispose();
     
-    spellcastingAbilityController.dispose();
-    spellcastingClassController.dispose();
-    spellSaveDCController.dispose();
-    spellAttackBonusController.dispose();
+    spellcastingAbility.dispose();
+    spellcastingClass.dispose();
+    spellSaveDC.dispose();
+    spellAttackBonus.dispose();
     
-    backstoryController.dispose();
-    ageController.dispose();
-    heightController.dispose();
-    weightController.dispose();
-    eyesController.dispose();
-    skinController.dispose();
-    hairController.dispose();
-    personalityTraitsController.dispose();
-    idealsController.dispose();
-    bondsController.dispose();
-    flawsController.dispose();
+    backstory.dispose();
+    age.dispose();
+    height.dispose();
+    weight.dispose();
+    eyes.dispose();
+    skin.dispose();
+    hair.dispose();
+    personalityTraits.dispose();
+    ideals.dispose();
+    bonds.dispose();
+    flaws.dispose();
     
-    sessionNotesController.dispose();
+    sessionNotes.dispose();
     
+  }
+}
+
+
+
+class ValueController {
+  final valueController = TextEditingController();
+  final String initialValue;
+  final void Function(ValueController) update;
+
+  ValueController({
+    required this.initialValue,
+    required this.update,
+  }) {
+    valueController.text = initialValue;
+    valueController.addListener((){update(this);});
+  }
+
+  void dispose() {
+    valueController.dispose();
   }
 }
 
@@ -294,7 +314,7 @@ class AbilityController {
   AbilityController({
     required this.update,
     required this.initialScore
-  }){
+  }) {
     scoreController.text = initialScore;
     scoreController.addListener(_updateAbilityModifier);
     _updateAbilityModifier();
