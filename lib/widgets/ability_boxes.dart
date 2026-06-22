@@ -1,53 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './widgets.dart';
+import '../classes/classes.dart';
 
-class SkillLine extends StatefulWidget {
+class SkillLine extends StatelessWidget {
+  final String value;
+  final SkillController skill;
+
   const SkillLine({
     super.key,
     required this.value,
-    this.pressed = false,
-    required this.controller,
+    required this.skill,
   });
 
-  final String value;
-  final bool pressed;
-  final TextEditingController controller;
 
-  @override
-  State<SkillLine> createState() => _SkillLineState();
-}
-
-class _SkillLineState extends State<SkillLine> {
-  late bool pressed;
-
-  @override
-  void initState() {
-    super.initState();
-    pressed = widget.pressed;
-  }
-
-  @override
+    @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(
-          width: 30,
-          height: 30,
-          child: IconButton(
-            iconSize: 15,
-            icon: Icon(pressed ? Icons.circle : Icons.circle_outlined),
-            onPressed: () {
-              setState(() {
-                pressed = !pressed;
-              });
-            },
-          ),
+        ValueListenableBuilder(
+          valueListenable: skill.isProficient,
+          builder: (_, proficient, _) {
+            return SizedBox(
+              width: 30,
+              height: 30,
+              child: IconButton(
+                iconSize: 15,
+                icon: Icon(proficient ? Icons.circle : Icons.circle_outlined),
+                onPressed: () {
+                  skill.isProficient.value = !skill.isProficient.value;
+                },
+              ),
+            );
+          }
         ),
         SizedBox(
           width: 25,
           child: TextField(
-            controller: widget.controller,
+            controller: skill.skillController,
             textAlign: .center,
             style: TextStyle(fontSize: 12),
             decoration: const InputDecoration(
@@ -57,13 +47,14 @@ class _SkillLineState extends State<SkillLine> {
           )
         ),
         Text(
-          widget.value,
+          value,
           style: TextStyle(fontSize: 12)
         )
       ]
     );
   }
 }
+
 
 
 
