@@ -34,6 +34,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<DNDCharacter> characters = [];
   final characterManager = CharacterManager();
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -45,12 +46,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadCharacters() async {
-    //setState(() => _isLoading = true);
+    setState(() => _isLoading = true);
 
     final chars = await characterManager.loadCharacters();
 
     setState(() {
       characters = chars;
+      _isLoading = false;
     });
   }
 
@@ -74,7 +76,10 @@ class _HomePageState extends State<HomePage> {
       
           Expanded(
             child: Center(
-              child: SingleChildScrollView(
+              child: _isLoading ?
+              CircularProgressIndicator()
+              :
+              SingleChildScrollView(
                 child: Column(
                   spacing: 20,
                   children: List.generate(
