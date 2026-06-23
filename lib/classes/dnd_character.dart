@@ -6,6 +6,9 @@ part 'dnd_character.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class DNDCharacter {
+  String fileID;
+  bool archived;
+
   String name;
   String className;
   String level;
@@ -128,6 +131,8 @@ class DNDCharacter {
   String sessionNotes;
 
   DNDCharacter({
+    required this.fileID,
+    this.archived = false,
     this.name = "",
     this.className = "",
     this.level = "",

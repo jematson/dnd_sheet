@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'widgets/widgets.dart';
 import './character_page.dart';
-import './classes/dnd_character.dart';
+import './classes/classes.dart';
+import 'package:uuid/uuid.dart';
 
 void main() {
   runApp(const MainApp());
@@ -31,15 +32,26 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<DNDCharacter> characters = [
-    DNDCharacter(name: "Frederick Cumbersnatch"),
-    DNDCharacter(name: "Jacquard Horowitz"),
-    DNDCharacter(name: "Flash Gamgee")
-  ];
+  List<DNDCharacter> characters = [];
+  final characterManager = CharacterManager();
 
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _loadCharacters();
+    });
+  }
+
+  Future<void> _loadCharacters() async {
+    //setState(() => _isLoading = true);
+
+    final chars = await characterManager.loadCharacters();
+
+    setState(() {
+      characters = chars;
+    });
   }
 
   @override
@@ -81,8 +93,9 @@ class _HomePageState extends State<HomePage> {
                                   builder: (context) => CharacterPage(character: characters[index])
                                 )
                               );
+                              final newChar = result as DNDCharacter;
+                              await characterManager.saveCharacter(newChar);
                               setState(() {
-                                final newChar = result as DNDCharacter;
                                 characters[index] = newChar;
                               });
                             }, 
@@ -106,7 +119,8 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     FilledButton(
                                       style: FilledButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
-                                      onPressed: (){
+                                      onPressed: () async {
+                                        await characterManager.archiveCharacter(characters[index]);
                                         setState(() {
                                           characters.removeAt(index);
                                           Navigator.pop(context);
@@ -139,14 +153,19 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 200),
                 child: OutlinedButton(
                   onPressed: () async {
+                    final newCharacter = DNDCharacter(fileID: Uuid().v1().toString());
+                    await characterManager.saveCharacter(newCharacter);
+
+                    if (!context.mounted) return;
                     final result = await Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (context) => CharacterPage(character: DNDCharacter())
+                        builder: (context) => CharacterPage(character: newCharacter)
                       )
                     );
+                    final newChar = result as DNDCharacter;
+                    await characterManager.saveCharacter(newChar);
                     setState(() {
-                      final newChar = result as DNDCharacter;
                       characters.add(newChar);
                     });
                   }, 

@@ -7,6 +7,8 @@ part of 'dnd_character.dart';
 // **************************************************************************
 
 DNDCharacter _$DNDCharacterFromJson(Map<String, dynamic> json) => DNDCharacter(
+  fileID: json['fileID'] as String,
+  archived: json['archived'] as bool? ?? false,
   name: json['name'] as String? ?? "",
   className: json['className'] as String? ?? "",
   level: json['level'] as String? ?? "",
@@ -127,6 +129,8 @@ DNDCharacter _$DNDCharacterFromJson(Map<String, dynamic> json) => DNDCharacter(
 
 Map<String, dynamic> _$DNDCharacterToJson(DNDCharacter instance) =>
     <String, dynamic>{
+      'fileID': instance.fileID,
+      'archived': instance.archived,
       'name': instance.name,
       'className': instance.className,
       'level': instance.level,
