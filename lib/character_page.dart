@@ -227,7 +227,7 @@ class _CharacterPageState extends State<CharacterPage> {
                             ),
 
                             CardSection(
-                              child: AttackSection()
+                              child: AttackSection(attacksController: cc.attackSection)
                             ),
 
                             CardSection(

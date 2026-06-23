@@ -165,6 +165,10 @@ class CharacterController {
   late ValueController hitDiceTotal = ValueController(initialValue: c.hitDiceTotal, update: (v){c.hitDiceTotal = v.valueController.text;});
   late ValueController hitDiceCurr = ValueController(initialValue: c.hitDiceCurr, update: (v){c.hitDiceCurr = v.valueController.text;});
 
+  late AttackSectionController attackSection = AttackSectionController(
+    initialAttacks: c.attacks,
+    update: (a){c.attacks = a.attacks.value;});
+
   late ValueController cp = ValueController(initialValue: c.cp, update: (v){c.cp = v.valueController.text;});
   late ValueController sp = ValueController(initialValue: c.sp, update: (v){c.sp = v.valueController.text;});
   late ValueController ep = ValueController(initialValue: c.ep, update: (v){c.ep = v.valueController.text;});

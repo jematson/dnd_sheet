@@ -232,3 +232,71 @@ class SpellSectionController {
     spellsController.dispose();
   }
 }
+
+
+
+class AttackController {
+  final Attack attack;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController bonusController = TextEditingController();
+  TextEditingController damageController = TextEditingController();
+  final void Function(AttackController) update;
+
+  AttackController({
+    required this.attack,
+    required this.update,
+  }) {
+    nameController.text = attack.name;
+    bonusController.text = attack.bonus;
+    damageController.text = attack.damage;
+
+    nameController.addListener((){
+      attack.name = nameController.text;
+      update(this);
+    });
+
+    bonusController.addListener((){
+      attack.bonus = bonusController.text;
+      update(this);
+    });
+
+    damageController.addListener((){
+      attack.damage = damageController.text;
+      update(this);
+    });
+  }
+
+  void dispose() {
+    nameController.dispose();
+    bonusController.dispose();
+    damageController.dispose();
+  }
+}
+
+
+
+class AttackSectionController {
+  late final List<AttackController> controllers = [];
+  final List<Attack> initialAttacks;
+  ValueNotifier<List<Attack>> attacks = ValueNotifier<List<Attack>>([]);
+  final void Function(AttackSectionController) update;
+
+  AttackSectionController({
+    required this.initialAttacks,
+    required this.update,
+  }) {
+    attacks.value = initialAttacks;
+
+    for (int i = 0; i < attacks.value.length; i++) {
+      controllers.add(AttackController(
+        attack: attacks.value[i], 
+        update: (c){
+          final newList = List<Attack>.from(attacks.value);
+          newList[i] = c.attack;
+          attacks.value = newList;
+        }));
+    }
+
+    attacks.addListener((){update(this);});
+  }
+}

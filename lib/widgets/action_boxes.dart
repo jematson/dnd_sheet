@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../classes/attack.dart';
+import '../classes/classes.dart';
 
 
 
-class AttackLine extends StatefulWidget {
-  const AttackLine({
+class AttackLine extends StatelessWidget {
+  final AttackController attack;
+  final void Function() deleteAttack;
+  final focusNode = FocusNode();
+  
+
+  AttackLine({
     super.key,
     required this.attack,
     required this.deleteAttack,
   });
 
-  final Attack attack;
-  final void Function() deleteAttack;
 
-  @override
-  State<AttackLine> createState() => _AttackLineState();
-}
-
-class _AttackLineState extends State<AttackLine> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  final focusNode = FocusNode();
-  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +26,7 @@ class _AttackLineState extends State<AttackLine> {
           child: Focus(
             focusNode: focusNode,
             child: TextField(
-              controller: nameController,
+              controller: attack.nameController,
               style: TextStyle(fontSize: 12),
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -46,9 +37,9 @@ class _AttackLineState extends State<AttackLine> {
             onKeyEvent: (node, event) {
               if (event is KeyDownEvent && 
                   event.logicalKey == LogicalKeyboardKey.backspace &&
-                  nameController.text.isEmpty) {
+                  attack.nameController.text.isEmpty) {
                 
-                widget.deleteAttack();
+                deleteAttack();
                 return KeyEventResult.handled;
               }
               return KeyEventResult.ignored;
@@ -58,6 +49,7 @@ class _AttackLineState extends State<AttackLine> {
         SizedBox(
           width: 40,
           child: TextField(
+            controller: attack.bonusController,
             style: TextStyle(fontSize: 12),
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -68,6 +60,7 @@ class _AttackLineState extends State<AttackLine> {
         ),
         Expanded(
           child: TextField(
+            controller: attack.damageController,
             style: TextStyle(fontSize: 12),
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
@@ -83,77 +76,80 @@ class _AttackLineState extends State<AttackLine> {
 
 
 
-class AttackSection extends StatefulWidget {
+class AttackSection extends StatelessWidget {
+  final AttackSectionController attacksController;
+
   const AttackSection({
     super.key,
+    required this.attacksController,
   });
 
   @override
-  State<AttackSection> createState() => _AttackSectionState();
-}
-
-class _AttackSectionState extends State<AttackSection> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  var attacks = <Attack>[];
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
+    return ValueListenableBuilder(
+      valueListenable: attacksController.attacks,
+      builder: (_, attacks, _) {
+        return Column(
           children: [
-            Expanded(
-              child: Text("Name", style: TextStyle(fontSize: 10))
+            Row(
+              children: [
+                Expanded(
+                  child: Text("Name", style: TextStyle(fontSize: 10))
+                ),
+                SizedBox(
+                  width: 40,
+                  child: Text("Bonus", style: TextStyle(fontSize: 10))
+                ),
+                Expanded(
+                  child: Text("Damage", style: TextStyle(fontSize: 10))
+                ),
+              ]
             ),
-            SizedBox(
-              width: 40,
-              child: Text("Bonus", style: TextStyle(fontSize: 10))
+        
+            Column(
+              spacing: 5,
+              children: List.generate(
+                attacks.length,
+                (index) => AttackLine(
+                  attack: attacksController.controllers[index],
+                  deleteAttack: () {
+                    final newList = List<Attack>.from(attacks);
+                    newList.removeAt(index);
+                    attacksController.attacks.value = newList;
+                    attacksController.controllers.removeAt(index);
+                  }
+                ),
+              )
             ),
-            Expanded(
-              child: Text("Damage", style: TextStyle(fontSize: 10))
-            ),
+        
+            Row(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Text("ATTACKS", style: TextStyle(fontSize: 10, fontWeight: .bold)),
+                SizedBox(
+                  width: 40,
+                  height: 30,
+                  child: IconButton(
+                    iconSize: 18,
+                    icon: Icon(Icons.add),
+                    onPressed: () {
+                      final newAttack = Attack();
+                      attacksController.controllers.add(AttackController(
+                        attack: newAttack, 
+                        update: (c){
+                          final newList = List<Attack>.from(attacksController.attacks.value);
+                          newList[attacksController.attacks.value.length - 1] = c.attack;
+                          attacksController.attacks.value = newList;
+                        }));
+                      attacksController.attacks.value = [...attacks, newAttack];
+                    },
+                  ),
+                ),
+              ],
+            )
           ]
-        ),
-
-        Column(
-          spacing: 5,
-          children: List.generate(
-            attacks.length,
-            (index) => AttackLine(
-              attack: attacks[index],
-              deleteAttack: () {
-                setState(() {
-                  attacks.removeAt(index);
-                });
-              }
-            ),
-          )
-        ),
-
-        Row(
-          mainAxisAlignment: .spaceBetween,
-          children: [
-            Text("ATTACKS", style: TextStyle(fontSize: 10, fontWeight: .bold)),
-            SizedBox(
-              width: 40,
-              height: 30,
-              child: IconButton(
-                iconSize: 18,
-                icon: Icon(Icons.add),
-                onPressed: () {
-                  setState(() {
-                    attacks.add(Attack());
-                  });
-                },
-              ),
-            ),
-          ],
-        )
-      ]
+        );
+      }
     );
   }
 }
