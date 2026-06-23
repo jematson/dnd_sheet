@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import './widgets.dart';
-import '../classes/spell.dart';
+import '../classes/classes.dart';
 
 
 // Individual Spell Line
@@ -79,115 +79,109 @@ class _SpellLineState extends State<SpellLine> {
 
 // Spell Level Section
 
-class SpellSection extends StatefulWidget {
+class SpellSection extends StatelessWidget {
+  final SpellLevel level;
+  final SpellSectionController spells;
+
   const SpellSection({
     super.key,
     required this.level,
+    required this.spells,
   });
 
-  final SpellLevel level;
 
-  @override
-  State<SpellSection> createState() => _SpellSectionState();
-}
-
-class _SpellSectionState extends State<SpellSection> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  var spells = <Spell>[];
-
-  @override
+    @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CardSection(
-          child: Row(
-            children:[
-              widget.level == .cantrip
-              ?Expanded(
-                  child: Text("CANTRIPS", textAlign: .center)
+    return ValueListenableBuilder(
+      valueListenable: spells.spellsController,
+      builder: (_, spellList, _) {
+        return Column(
+          children: [
+            CardSection(
+              child: Row(
+                children:[
+                  level == .cantrip
+                  ?Expanded(
+                      child: Text("CANTRIPS", textAlign: .center)
+                  )
+                  :Expanded(
+                    child: Row(
+                      spacing: 5,
+                      children: [
+                        Text(
+                          level.num,
+                          style: TextStyle(fontSize: 20), 
+                          textAlign: .center
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text("SLOTS TOTAL", style: TextStyle(fontSize: 8)),
+                              TextField(
+                                textAlignVertical: .center,
+                                style: TextStyle(fontSize: 14),
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  isDense: true
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Text("SLOTS EXPENDED", style: TextStyle(fontSize: 8)),
+                              TextField(
+                                textAlignVertical: .center,
+                                style: TextStyle(fontSize: 14),
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  isDense: true
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+        
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        spells.spellsController.value = [...spellList,(Spell(level: level))];
+                      },
+                    ),
+                  ),
+                ]
               )
-              :Expanded(
-                child: Row(
-                  spacing: 5,
-                  children: [
-                    Text(
-                      widget.level.num,
-                      style: TextStyle(fontSize: 20), 
-                      textAlign: .center
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text("SLOTS TOTAL", style: TextStyle(fontSize: 8)),
-                          TextField(
-                            textAlignVertical: .center,
-                            style: TextStyle(fontSize: 14),
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              isDense: true
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Text("SLOTS EXPENDED", style: TextStyle(fontSize: 8)),
-                          TextField(
-                            textAlignVertical: .center,
-                            style: TextStyle(fontSize: 14),
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              isDense: true
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(
-                width: 40,
-                height: 40,
-                child: IconButton(
-                  icon: Icon(Icons.add),
-                  onPressed: () {
-                    setState(() {
-                      spells.add(Spell(level: widget.level));
-                    });
-                  },
-                ),
-              ),
-            ]
-          )
-        ),
-        Column(
-          spacing: 5,
-          children: List.generate(
-            spells.length,
-            (index) => SpellLine(
-              spell: spells[index],
-              spellSaved: (updatedSpell) {
-                setState(() {
-                  spells[index] = updatedSpell;
-                });
-              },
-              deleteSpell: () {
-                setState(() {
-                  spells.removeAt(index);
-                });
-              }
             ),
-          )
-        )
-      ],
+            Column(
+              spacing: 5,
+              children: List.generate(
+                spellList.length,
+                (index) => SpellLine(
+                  spell: spellList[index],
+                  spellSaved: (updatedSpell) {
+                    final newList = List<Spell>.from(spellList);
+                    newList[index] = updatedSpell;
+                    spells.spellsController.value = newList;
+                  },
+                  deleteSpell: () {
+                    final newList = List<Spell>.from(spellList);
+                    newList.removeAt(index);
+                    spells.spellsController.value = newList;
+                  }
+                ),
+              )
+            )
+          ],
+        );
+      }
     );
   }
 }

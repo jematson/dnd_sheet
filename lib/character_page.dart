@@ -301,28 +301,28 @@ class _CharacterPageState extends State<CharacterPage> {
                       Expanded(
                         child: Column(
                           children: [
-                            SpellSection(level: .cantrip),
-                            SpellSection(level: .one),
-                            SpellSection(level: .two),
+                            SpellSection(level: .cantrip, spells: cc.cantrips),
+                            SpellSection(level: .one, spells: cc.spells1),
+                            SpellSection(level: .two, spells: cc.spells2),
                           ]
                         )
                       ),
                       Expanded(
                         child: Column(
                           children: [
-                            SpellSection(level: .three),
-                            SpellSection(level: .four),
-                            SpellSection(level: .five),
+                            SpellSection(level: .three, spells: cc.spells3),
+                            SpellSection(level: .four, spells: cc.spells4),
+                            SpellSection(level: .five, spells: cc.spells5),
                           ]
                         )
                       ),
                       Expanded(
                         child: Column(
                           children: [
-                            SpellSection(level: .six),
-                            SpellSection(level: .seven),
-                            SpellSection(level: .eight),
-                            SpellSection(level: .nine)
+                            SpellSection(level: .six, spells: cc.spells6),
+                            SpellSection(level: .seven, spells: cc.spells7),
+                            SpellSection(level: .eight, spells: cc.spells8),
+                            SpellSection(level: .nine, spells: cc.spells9)
                           ]
                         )
                       )

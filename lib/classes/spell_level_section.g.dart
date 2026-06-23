@@ -10,14 +10,14 @@ SpellLevelSection _$SpellLevelSectionFromJson(Map<String, dynamic> json) =>
     SpellLevelSection(
       spells: (json['spells'] as List<dynamic>?)
           ?.map((e) => Spell.fromJson(e as Map<String, dynamic>))
-          .toList() ?? [],
+          .toList(),
       slotsTotal: json['slotsTotal'] as String? ?? "",
       slotsExpended: json['slotsExpended'] as String? ?? "",
     );
 
 Map<String, dynamic> _$SpellLevelSectionToJson(SpellLevelSection instance) =>
     <String, dynamic>{
-      'spells': instance.spells,
+      'spells': instance.spells.map((e) => e.toJson()).toList(),
       'slotsTotal': instance.slotsTotal,
       'slotsExpended': instance.slotsExpended,
     };

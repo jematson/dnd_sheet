@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'spell_level_section.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SpellLevelSection {
   List<Spell> spells;
   String slotsTotal;

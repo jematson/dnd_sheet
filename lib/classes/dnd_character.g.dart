@@ -81,7 +81,7 @@ DNDCharacter _$DNDCharacterFromJson(Map<String, dynamic> json) => DNDCharacter(
   backstory: json['backstory'] as String? ?? "",
   attacks: (json['attacks'] as List<dynamic>?)
       ?.map((e) => Attack.fromJson(e as Map<String, dynamic>))
-      .toList() ?? [],
+      .toList(),
   cp: json['cp'] as String? ?? "",
   sp: json['sp'] as String? ?? "",
   ep: json['ep'] as String? ?? "",

@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'dnd_character.dart';
+import './classes.dart';
 
 
 class CharacterController {
@@ -182,6 +180,57 @@ class CharacterController {
   late ValueController spellSaveDC = ValueController(initialValue: c.spellSaveDC, update: (v){c.spellSaveDC = v.valueController.text;});
   late ValueController spellAttackBonus = ValueController(initialValue: c.spellAttackBonus, update: (v){c.spellAttackBonus = v.valueController.text;});
 
+  late SpellSectionController cantrips = SpellSectionController(
+    initialSpellSection: c.cantrips, 
+    update: (s){c.cantrips.spells = s.spellsController.value;
+                c.cantrips.slotsExpended = s.slotsExpendedController.text;
+                c.cantrips.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells1 = SpellSectionController(
+    initialSpellSection: c.spells1, 
+    update: (s){c.spells1.spells = s.spellsController.value;
+                c.spells1.slotsExpended = s.slotsExpendedController.text;
+                c.spells1.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells2 = SpellSectionController(
+    initialSpellSection: c.spells2, 
+    update: (s){c.spells2.spells = s.spellsController.value;
+                c.spells2.slotsExpended = s.slotsExpendedController.text;
+                c.spells2.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells3 = SpellSectionController(
+    initialSpellSection: c.spells3, 
+    update: (s){c.spells3.spells = s.spellsController.value;
+                c.spells3.slotsExpended = s.slotsExpendedController.text;
+                c.spells3.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells4 = SpellSectionController(
+    initialSpellSection: c.spells4, 
+    update: (s){c.spells4.spells = s.spellsController.value;
+                c.spells4.slotsExpended = s.slotsExpendedController.text;
+                c.spells4.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells5 = SpellSectionController(
+    initialSpellSection: c.spells5, 
+    update: (s){c.spells5.spells = s.spellsController.value;
+                c.spells5.slotsExpended = s.slotsExpendedController.text;
+                c.spells5.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells6 = SpellSectionController(
+    initialSpellSection: c.spells6, 
+    update: (s){c.spells6.spells = s.spellsController.value;
+                c.spells6.slotsExpended = s.slotsExpendedController.text;
+                c.spells6.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells7 = SpellSectionController(
+    initialSpellSection: c.spells7, 
+    update: (s){c.spells7.spells = s.spellsController.value;
+                c.spells7.slotsExpended = s.slotsExpendedController.text;
+                c.spells7.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells8 = SpellSectionController(
+    initialSpellSection: c.spells8, 
+    update: (s){c.spells8.spells = s.spellsController.value;
+                c.spells8.slotsExpended = s.slotsExpendedController.text;
+                c.spells8.slotsTotal = s.slotsTotalController.text;});
+  late SpellSectionController spells9 = SpellSectionController(
+    initialSpellSection: c.spells9, 
+    update: (s){c.spells9.spells = s.spellsController.value;
+                c.spells9.slotsExpended = s.slotsExpendedController.text;
+                c.spells9.slotsTotal = s.slotsTotalController.text;});
+
   late ValueController backstory = ValueController(initialValue: c.backstory, update: (v){c.backstory = v.valueController.text;});
   late ValueController age = ValueController(initialValue: c.age, update: (v){c.age = v.valueController.text;});
   late ValueController height = ValueController(initialValue: c.height, update: (v){c.height = v.valueController.text;});
@@ -271,6 +320,17 @@ class CharacterController {
     spellcastingClass.dispose();
     spellSaveDC.dispose();
     spellAttackBonus.dispose();
+
+    cantrips.dispose();
+    spells1.dispose();
+    spells2.dispose();
+    spells3.dispose();
+    spells4.dispose();
+    spells5.dispose();
+    spells6.dispose();
+    spells7.dispose();
+    spells8.dispose();
+    spells9.dispose();
     
     backstory.dispose();
     age.dispose();
@@ -285,211 +345,5 @@ class CharacterController {
     flaws.dispose();
     
     sessionNotes.dispose();
-    
-  }
-}
-
-
-
-class ValueController {
-  final valueController = TextEditingController();
-  final String initialValue;
-  final void Function(ValueController) update;
-
-  ValueController({
-    required this.initialValue,
-    required this.update,
-  }) {
-    valueController.text = initialValue;
-    valueController.addListener((){update(this);});
-  }
-
-  void dispose() {
-    valueController.dispose();
-  }
-}
-
-
-
-class AbilityController {
-  final scoreController = TextEditingController();
-  final modifierController = TextEditingController();
-  final void Function(AbilityController) update;
-  final String initialScore;
-
-  AbilityController({
-    required this.update,
-    required this.initialScore
-  }) {
-    scoreController.text = initialScore;
-    scoreController.addListener(_updateAbilityModifier);
-    _updateAbilityModifier();
-  }
-
-  void _updateAbilityModifier() {
-    final score = int.tryParse(scoreController.text);
-    if (score != null) {
-      final mod = ((score - 10) / 2).floor();
-      modifierController.text = mod < 0 ? mod.toString() : "+${mod.toString()}";
-      update(this);
-    } else {
-      modifierController.text = "";
-    }
-  }
-
-  void dispose() {
-    scoreController.dispose();
-    modifierController.dispose();
-  }
-}
-
-
-
-class ProficiencyController {
-  final profBonusController = TextEditingController();
-  final TextEditingController levelController;
-  final String initialValue;
-  final void Function(ProficiencyController) update;
-
-  ProficiencyController({
-    required this.levelController,
-    required this.initialValue,
-    required this.update,
-  }) {
-    profBonusController.text = initialValue;
-    levelController.addListener(_updateProficiencyBonus);
-    _updateProficiencyBonus();
-  }
-
-  void _updateProficiencyBonus() {
-    if (levelController.text == "1" || 
-        levelController.text == "2" || 
-        levelController.text == "3" || 
-        levelController.text == "4") {
-      profBonusController.text = "2";
-    } else if (levelController.text == "5" || 
-               levelController.text == "6" || 
-               levelController.text == "7" || 
-               levelController.text == "8") {
-      profBonusController.text = "3";
-    } else if (levelController.text == "9" || 
-               levelController.text == "10" || 
-               levelController.text == "11" || 
-               levelController.text == "12") {
-      profBonusController.text = "4";
-    } else if (levelController.text == "13" || 
-               levelController.text == "14" || 
-               levelController.text == "15" || 
-               levelController.text == "16") {
-      profBonusController.text = "5";
-    } else if (levelController.text == "17" || 
-               levelController.text == "18" || 
-               levelController.text == "19" || 
-               levelController.text == "20") {
-      profBonusController.text = "6";
-    }
-    update(this);
-  }
-
-  void dispose() {
-    profBonusController.dispose();
-    levelController.removeListener(_updateProficiencyBonus);
-  }
-}
-
-
-
-class SkillController {
-  final skillController = TextEditingController();
-  final bool initialProficiency;
-  ValueNotifier<bool> isProficient = ValueNotifier<bool>(false);
-  final TextEditingController abilityModController;
-  final TextEditingController proficiencyController;
-  final void Function(SkillController) update;
-
-  SkillController({
-    required this.initialProficiency,
-    required this.update,
-    required this.abilityModController,
-    required this.proficiencyController,
-  }) {
-    isProficient.value = initialProficiency;
-    proficiencyController.addListener(_updateSkillBonus);
-    abilityModController.addListener(_updateSkillBonus);
-    isProficient.addListener(_updateSkillBonus);
-    _updateSkillBonus();
-  }
-
-  void _updateSkillBonus() {
-    final mod = int.tryParse(abilityModController.text);
-    if (mod != null) {
-      final prof = int.tryParse(proficiencyController.text);
-      if (prof != null && isProficient.value) {
-        final num = mod + prof;
-        skillController.text = num < 0 ? num.toString() : "+${num.toString()}";
-      } else {
-        skillController.text = mod < 0 ? mod.toString() : "+${mod.toString()}";
-      }
-    } else {
-      skillController.text = "";
-    }
-    update(this);
-  }
-
-  void dispose() {
-    skillController.dispose();
-    isProficient.dispose();
-    proficiencyController.removeListener(_updateSkillBonus);
-    abilityModController.removeListener(_updateSkillBonus);
-  }
-}
-
-
-
-class DeathSavesController {
-  final bool initialS1;
-  final bool initialS2;
-  final bool initialS3;
-  final bool initialF1;
-  final bool initialF2;
-  final bool initialF3;
-  ValueNotifier<bool> s1 = ValueNotifier<bool>(false);
-  ValueNotifier<bool> s2 = ValueNotifier<bool>(false);
-  ValueNotifier<bool> s3 = ValueNotifier<bool>(false);
-  ValueNotifier<bool> f1 = ValueNotifier<bool>(false);
-  ValueNotifier<bool> f2 = ValueNotifier<bool>(false);
-  ValueNotifier<bool> f3 = ValueNotifier<bool>(false);
-  final void Function(DeathSavesController) update;
-
-  DeathSavesController({
-    required this.initialS1,
-    required this.initialS2,
-    required this.initialS3,
-    required this.initialF1,
-    required this.initialF2,
-    required this.initialF3,
-    required this.update,
-  }) {
-    s1.value = initialS1;
-    s2.value = initialS2;
-    s3.value = initialS3;
-    f1.value = initialF1;
-    f2.value = initialF2;
-    f3.value = initialF3;
-    s1.addListener((){update(this);});
-    s2.addListener((){update(this);});
-    s3.addListener((){update(this);});
-    f1.addListener((){update(this);});
-    f2.addListener((){update(this);});
-    f3.addListener((){update(this);});
-  }
-
-  void dispose() {
-    s1.dispose();
-    s2.dispose();
-    s3.dispose();
-    f1.dispose();
-    f2.dispose();
-    f3.dispose();
   }
 }

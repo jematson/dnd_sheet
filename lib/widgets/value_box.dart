@@ -1,5 +1,5 @@
-import 'package:dnd_sheet/classes/character_controller.dart';
 import 'package:flutter/material.dart';
+import '../classes/classes.dart';
 
 
 enum LabelPosition { left, right, top, bottom }
