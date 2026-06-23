@@ -1,3 +1,4 @@
+import 'package:dnd_sheet/classes/character_controller.dart';
 import 'package:flutter/material.dart';
 
 
@@ -195,46 +196,14 @@ class CardSection extends StatelessWidget {
 
 
 
-class SavesBox extends StatefulWidget {
+class SavesBox extends StatelessWidget {
+  final DeathSavesController saves;
+
   const SavesBox({
     super.key,
-    this.success1 = false,
-    this.success2 = false,
-    this.success3 = false,
-    this.failure1 = false,
-    this.failure2 = false,
-    this.failure3 = false,
+    required this.saves,
   });
 
-  final bool success1;
-  final bool success2;
-  final bool success3;
-  final bool failure1;
-  final bool failure2;
-  final bool failure3;
-
-  @override
-  State<SavesBox> createState() => _SavesBoxState();
-}
-
-class _SavesBoxState extends State<SavesBox> {
-  late bool success1;
-  late bool success2;
-  late bool success3;
-  late bool failure1;
-  late bool failure2;
-  late bool failure3;
-
-  @override
-  void initState() {
-    super.initState();
-    success1 = widget.success1;
-    success2 = widget.success2;
-    success3 = widget.success3;
-    failure1 = widget.failure1;
-    failure2 = widget.failure2;
-    failure3 = widget.failure3;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -254,44 +223,53 @@ class _SavesBoxState extends State<SavesBox> {
                   "SUCCESSES",
                   style: TextStyle(fontSize: 10)
                 ),
-                SizedBox(
-                  width: 20,
-                  height: 30,
-                  child: IconButton(
-                    iconSize: 15,
-                    icon: Icon(success1 ? Icons.circle : Icons.circle_outlined),
-                    onPressed: () {
-                      setState(() {
-                        success1 = !success1;
-                      });
-                    },
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: saves.s1,
+                  builder: (_, v, _) {
+                    return SizedBox(
+                      width: 20,
+                      height: 30,
+                      child: IconButton(
+                        iconSize: 15,
+                        icon: Icon(v ? Icons.circle : Icons.circle_outlined),
+                        onPressed: () {
+                          saves.s1.value = !saves.s1.value;
+                        },
+                      ),
+                    );
+                  }
                 ),
-                SizedBox(
-                  width: 20,
-                  height: 30,
-                  child: IconButton(
-                    iconSize: 15,
-                    icon: Icon(success2 ? Icons.circle : Icons.circle_outlined),
-                    onPressed: () {
-                      setState(() {
-                        success2 = !success2;
-                      });
-                    },
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: saves.s2,
+                  builder: (_, v, _) {
+                    return SizedBox(
+                      width: 20,
+                      height: 30,
+                      child: IconButton(
+                        iconSize: 15,
+                        icon: Icon(v ? Icons.circle : Icons.circle_outlined),
+                        onPressed: () {
+                          saves.s2.value = !saves.s2.value;
+                        },
+                      ),
+                    );
+                  }
                 ),
-                SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: IconButton(
-                    iconSize: 15,
-                    icon: Icon(success3 ? Icons.circle : Icons.circle_outlined),
-                    onPressed: () {
-                      setState(() {
-                        success3 = !success3;
-                      });
-                    },
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: saves.s3,
+                  builder: (_, v, _) {
+                    return SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: IconButton(
+                        iconSize: 15,
+                        icon: Icon(v ? Icons.circle : Icons.circle_outlined),
+                        onPressed: () {
+                          saves.s3.value = !saves.s3.value;
+                        },
+                      ),
+                    );
+                  }
                 ),
               ],
             ),
@@ -302,44 +280,53 @@ class _SavesBoxState extends State<SavesBox> {
                   "FAILURES",
                   style: TextStyle(fontSize: 10)
                 ),
-                SizedBox(
-                  width: 20,
-                  height: 30,
-                  child: IconButton(
-                    iconSize: 15,
-                    icon: Icon(failure1 ? Icons.circle : Icons.circle_outlined),
-                    onPressed: () {
-                      setState(() {
-                        failure1 = !failure1;
-                      });
-                    },
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: saves.f1,
+                  builder: (_, v, _) {
+                    return SizedBox(
+                      width: 20,
+                      height: 30,
+                      child: IconButton(
+                        iconSize: 15,
+                        icon: Icon(v ? Icons.circle : Icons.circle_outlined),
+                        onPressed: () {
+                          saves.f1.value = !saves.f1.value;
+                        },
+                      ),
+                    );
+                  }
                 ),
-                SizedBox(
-                  width: 20,
-                  height: 30,
-                  child: IconButton(
-                    iconSize: 15,
-                    icon: Icon(failure2 ? Icons.circle : Icons.circle_outlined),
-                    onPressed: () {
-                      setState(() {
-                        failure2 = !failure2;
-                      });
-                    },
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: saves.f2,
+                  builder: (_, v, _) {
+                    return SizedBox(
+                      width: 20,
+                      height: 30,
+                      child: IconButton(
+                        iconSize: 15,
+                        icon: Icon(v ? Icons.circle : Icons.circle_outlined),
+                        onPressed: () {
+                          saves.f2.value = !saves.f2.value;
+                        },
+                      ),
+                    );
+                  }
                 ),
-                SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: IconButton(
-                    iconSize: 15,
-                    icon: Icon(failure3 ? Icons.circle : Icons.circle_outlined),
-                    onPressed: () {
-                      setState(() {
-                        failure3 = !failure3;
-                      });
-                    },
-                  ),
+                ValueListenableBuilder(
+                  valueListenable: saves.f3,
+                  builder: (_, v, _) {
+                    return SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: IconButton(
+                        iconSize: 15,
+                        icon: Icon(v ? Icons.circle : Icons.circle_outlined),
+                        onPressed: () {
+                          saves.f3.value = !saves.f3.value;
+                        },
+                      ),
+                    );
+                  }
                 ),
               ],
             ),

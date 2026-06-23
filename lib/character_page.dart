@@ -26,7 +26,7 @@ class _CharacterPageState extends State<CharacterPage> {
     super.initState();
     character = widget.character;
     editedCharacter = widget.character.copy();
-    cc = CharacterController(character: editedCharacter);
+    cc = CharacterController(c: editedCharacter);
   }
 
 
@@ -222,7 +222,7 @@ class _CharacterPageState extends State<CharacterPage> {
                                     )
                                   ),
                                 ),
-                                SavesBox(),
+                                SavesBox(saves: cc.savesController),
                               ],
                             ),
 
