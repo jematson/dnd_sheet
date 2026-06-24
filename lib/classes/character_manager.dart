@@ -15,8 +15,6 @@ class CharacterManager {
       await characterDirectory.create(recursive: true);
     }
 
-    print("Characters Directory: ${characterDirectory.absolute.path}");
-
     return characterDirectory;
   }
 
@@ -52,7 +50,6 @@ class CharacterManager {
 
 
   Future<void> saveCharacter(DNDCharacter character) async {
-    print("Saving Character ${character.name}");
     final fileRef = await _characterFileReference(character.fileID);
     
     final jsonString = jsonEncode(character.toJson());

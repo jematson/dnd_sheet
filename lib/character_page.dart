@@ -22,6 +22,7 @@ class _CharacterPageState extends State<CharacterPage> {
   late CharacterController cc;
   late CharacterManager manager;
   bool _isSaving = false;
+  late final ValueNotifier<bool> _hasSpellcasting = ValueNotifier(character.showSpellcasting);
 
   @override
   void initState() {
@@ -356,65 +357,104 @@ class _CharacterPageState extends State<CharacterPage> {
                           
                           ]
                         ),
-                    
-          
-                        Row(      // Spellcasting Header
-                          children: [
-                            Expanded(
-                              child: ValueBox(label: "SPELLCASTING CLASS", position: .bottom, controller: cc.spellcastingClass.valueController)
-                            ),
-                            Expanded(
-                              child: Row(
+
+
+                        // SPELLCASTING SECTION
+                        
+                        Card(
+                          child: ValueListenableBuilder(
+                            valueListenable: _hasSpellcasting,
+                            builder: (_, hasSpells, _) {
+                              return Column(
                                 children: [
-                                  Expanded(
-                                    child: ValueBox(label: "SPELLCASTING ABILITY", position: .bottom, controller: cc.spellcastingAbility.valueController)
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 1),
+                                    child: Row(
+                                      mainAxisAlignment: .spaceBetween,
+                                      children: [
+                                        SizedBox(child: Text("SPELLCASTING", style: TextStyle(fontSize: 25, fontWeight: .bold))),
+                                        IconButton(
+                                          icon: Icon(hasSpells ? Icons.visibility : Icons.visibility_off),
+                                          iconSize: 30,
+                                          onPressed: () {
+                                            _hasSpellcasting.value = !_hasSpellcasting.value;
+                                            cc.c.value.showSpellcasting = _hasSpellcasting.value;
+                                            cc.c.notifyListeners();
+                                          }
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Expanded(
-                                    child: ValueBox(label: "SPELL SAVE DC", position: .bottom, formatter: numeric, controller: cc.spellSaveDC.valueController)
-                                  ),
-                                  Expanded(
-                                    child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom, formatter: numericPlus, controller: cc.spellAttackBonus.valueController)
-                                  ),
+                          
+                                  // Spellcasting Header
+                                  hasSpells ?
+                                  Row(      
+                                    children: [
+                                      Expanded(
+                                        child: ValueBox(label: "SPELLCASTING CLASS", position: .bottom, controller: cc.spellcastingClass.valueController)
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: ValueBox(label: "SPELLCASTING ABILITY", position: .bottom, controller: cc.spellcastingAbility.valueController)
+                                            ),
+                                            Expanded(
+                                              child: ValueBox(label: "SPELL SAVE DC", position: .bottom, formatter: numeric, controller: cc.spellSaveDC.valueController)
+                                            ),
+                                            Expanded(
+                                              child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom, formatter: numericPlus, controller: cc.spellAttackBonus.valueController)
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ]
+                                  )
+                                  : const SizedBox(),
+                                            
+                                  // Spellcasting Columns
+                                  hasSpells ?
+                                  Row(
+                                    crossAxisAlignment: .start,
+                                    children: [
+                                      Expanded(
+                                        child: Column(
+                                          children: [
+                                            SpellSection(level: .cantrip, spells: cc.cantrips),
+                                            SpellSection(level: .one, spells: cc.spells1),
+                                            SpellSection(level: .two, spells: cc.spells2),
+                                          ]
+                                        )
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          children: [
+                                            SpellSection(level: .three, spells: cc.spells3),
+                                            SpellSection(level: .four, spells: cc.spells4),
+                                            SpellSection(level: .five, spells: cc.spells5),
+                                          ]
+                                        )
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          children: [
+                                            SpellSection(level: .six, spells: cc.spells6),
+                                            SpellSection(level: .seven, spells: cc.spells7),
+                                            SpellSection(level: .eight, spells: cc.spells8),
+                                            SpellSection(level: .nine, spells: cc.spells9)
+                                          ]
+                                        )
+                                      )
+                                    ]
+                                  )
+                                  : const SizedBox(),
                                 ],
-                              ),
-                            )
-                          ]
+                              );
+                            }
+                          ),
                         ),
           
-                        // Spellcasting Columns
-                        Row(
-                          crossAxisAlignment: .start,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  SpellSection(level: .cantrip, spells: cc.cantrips),
-                                  SpellSection(level: .one, spells: cc.spells1),
-                                  SpellSection(level: .two, spells: cc.spells2),
-                                ]
-                              )
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  SpellSection(level: .three, spells: cc.spells3),
-                                  SpellSection(level: .four, spells: cc.spells4),
-                                  SpellSection(level: .five, spells: cc.spells5),
-                                ]
-                              )
-                            ),
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  SpellSection(level: .six, spells: cc.spells6),
-                                  SpellSection(level: .seven, spells: cc.spells7),
-                                  SpellSection(level: .eight, spells: cc.spells8),
-                                  SpellSection(level: .nine, spells: cc.spells9)
-                                ]
-                              )
-                            )
-                          ]
-                        ),
+
                     
                         // Character Info Section
                         Row(

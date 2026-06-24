@@ -112,6 +112,7 @@ class DNDCharacter {
 
 
   // Spellcasting
+  bool showSpellcasting;
   String spellcastingClass;
   String spellcastingAbility;
   String spellSaveDC;
@@ -212,6 +213,7 @@ class DNDCharacter {
     this.gp = "",
     this.pp = "",
     this.inventory = "",
+    this.showSpellcasting = true,
     this.spellAttackBonus = "",
     this.spellSaveDC = "",
     this.spellcastingAbility = "",
