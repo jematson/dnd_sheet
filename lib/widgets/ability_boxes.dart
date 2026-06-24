@@ -37,6 +37,7 @@ class SkillLine extends StatelessWidget {
         SizedBox(
           width: 25,
           child: TextField(
+            readOnly: true,
             controller: skill.skillController,
             textAlign: .center,
             style: TextStyle(fontSize: 12),
@@ -98,6 +99,7 @@ class AbilityBox extends StatelessWidget {
             width: 27,
             height: 27,
             child: TextField(
+              readOnly: true,
               controller: modController,
               textAlign: .center,
               textAlignVertical: .center,
