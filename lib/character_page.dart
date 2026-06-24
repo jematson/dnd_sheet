@@ -137,7 +137,7 @@ class _CharacterPageState extends State<CharacterPage> {
                           Row(
                             spacing: 10,
                             children: [
-                              LabeledField.square(label: "LEVEL", position: .bottom, align: .center, controller: cc.level.valueController),
+                              LabeledField.square(label: "LEVEL", position: .bottom, align: .center, formatter: numeric, controller: cc.level.valueController),
                               Expanded(
                                 child: LabeledField(label: "CLASS", position: .bottom, controller: cc.className.valueController)
                               ),
@@ -268,8 +268,8 @@ class _CharacterPageState extends State<CharacterPage> {
                                   Row(
                                     mainAxisAlignment: .center,
                                     children: [
-                                      Expanded(child: ValueBox(label: "AC", position: .bottom, align: .center, controller: cc.ac.valueController)),
-                                      Expanded(child: ValueBox(label: "INITIATIVE", position: .bottom, align: .center, controller: cc.initiative.valueController)),
+                                      Expanded(child: ValueBox(label: "AC", position: .bottom, align: .center, formatter: numericPlus, controller: cc.ac.valueController)),
+                                      Expanded(child: ValueBox(label: "INITIATIVE", position: .bottom, align: .center, formatter: numericPlus, controller: cc.initiative.valueController)),
                                       Expanded(child: ValueBox(label: "SPEED", position: .bottom, align: .center, controller: cc.speed.valueController)),
                                     ],
                                   ),
@@ -282,13 +282,13 @@ class _CharacterPageState extends State<CharacterPage> {
                                           spacing: 10,
                                           children: [
                                             Expanded(
-                                              child: LabeledField(label: "MAX", position: .bottom, align: .center, controller: cc.hpMax.valueController)
+                                              child: LabeledField(label: "MAX", position: .bottom, align: .center, formatter: numeric, controller: cc.hpMax.valueController)
                                             ),
                                             Expanded(
-                                              child: LabeledField(label: "CURRENT", position: .bottom, align: .center, controller: cc.hpCurr.valueController)
+                                              child: LabeledField(label: "CURRENT", position: .bottom, align: .center, formatter: numeric, controller: cc.hpCurr.valueController)
                                             ),
                                             Expanded(
-                                              child: LabeledField(label: "TEMP", position: .bottom, align: .center, controller: cc.hpTemp.valueController)
+                                              child: LabeledField(label: "TEMP", position: .bottom, align: .center, formatter: numeric, controller: cc.hpTemp.valueController)
                                             ),
                                           ],
                                         ),
@@ -324,11 +324,11 @@ class _CharacterPageState extends State<CharacterPage> {
                                         Row(
                                           spacing: 5,
                                           children: [
-                                            Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center, controller: cc.cp.valueController)),
-                                            Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center, controller: cc.sp.valueController)),
-                                            Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center, controller: cc.ep.valueController)),
-                                            Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center, controller: cc.gp.valueController)),
-                                            Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center, controller: cc.pp.valueController)),
+                                            Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.cp.valueController)),
+                                            Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.sp.valueController)),
+                                            Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.ep.valueController)),
+                                            Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.gp.valueController)),
+                                            Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.pp.valueController)),
                                           ]
                                         ),
                                         LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24, controller: cc.inventory.valueController)
@@ -346,9 +346,9 @@ class _CharacterPageState extends State<CharacterPage> {
                               child: Column(
                                 crossAxisAlignment: .start,
                                 children: [
-                                  ValueBox.square(label: "INSPIRATION", position: .right, controller: cc.inspiration.valueController),
-                                  ValueBox.square(label: "PROFICIENCY BONUS", position: .right, controller: cc.proficiencyBonus.profBonusController),
-                                  ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, controller: cc.passivePerception.valueController),
+                                  ValueBox.square(label: "INSPIRATION", position: .right, formatter: numeric, controller: cc.inspiration.valueController),
+                                  ValueBox.square(label: "PROFICIENCY BONUS", position: .right, formatter: numericPlus, controller: cc.proficiencyBonus.profBonusController),
+                                  ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, formatter: numeric, controller: cc.passivePerception.valueController),
                                   ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraits.valueController),
                                 ]
                               )
@@ -370,10 +370,10 @@ class _CharacterPageState extends State<CharacterPage> {
                                     child: ValueBox(label: "SPELLCASTING ABILITY", position: .bottom, controller: cc.spellcastingAbility.valueController)
                                   ),
                                   Expanded(
-                                    child: ValueBox(label: "SPELL SAVE DC", position: .bottom, controller: cc.spellSaveDC.valueController)
+                                    child: ValueBox(label: "SPELL SAVE DC", position: .bottom, formatter: numeric, controller: cc.spellSaveDC.valueController)
                                   ),
                                   Expanded(
-                                    child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom, controller: cc.spellAttackBonus.valueController)
+                                    child: ValueBox(label: "SPELL ATTACK BONUS", position: .bottom, formatter: numericPlus, controller: cc.spellAttackBonus.valueController)
                                   ),
                                 ],
                               ),

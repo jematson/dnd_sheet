@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../classes/classes.dart';
 
 
@@ -15,6 +16,7 @@ class LabeledField extends StatelessWidget {
     this.size = 14,
     this.align = .start,
     this.maxLines = 2,
+    this.formatter,
     required this.controller,
   });
 
@@ -26,6 +28,7 @@ class LabeledField extends StatelessWidget {
     this.size = 16,
     this.align = .start,
     this.maxLines = 2,
+    this.formatter,
     required this.controller,
   }) : square = true;
 
@@ -37,6 +40,7 @@ class LabeledField extends StatelessWidget {
   final TextAlign align;
   final int maxLines;
   final TextEditingController controller;
+  final FilteringTextInputFormatter? formatter;
 
   Widget _field() {
     Widget field = TextField(
@@ -45,6 +49,7 @@ class LabeledField extends StatelessWidget {
       controller: controller,
       minLines: multiline ? maxLines : 1,
       maxLines: multiline ? null : 1,
+      inputFormatters: formatter == null ? [] : [formatter!],
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         isDense: true,
@@ -131,6 +136,7 @@ class ValueBox extends StatelessWidget {
     this.size = 16,
     this.align = .start,
     this.maxLines = 2,
+    this.formatter,
     required this.controller,
   });
 
@@ -142,6 +148,7 @@ class ValueBox extends StatelessWidget {
     this.size = 16,
     this.align = .start,
     this.maxLines = 2,
+    this.formatter,
     required this.controller,
   }) : square = true;
 
@@ -153,6 +160,7 @@ class ValueBox extends StatelessWidget {
   final TextAlign align;
   final int maxLines;
   final TextEditingController controller;
+  final FilteringTextInputFormatter? formatter;
 
   @override
   Widget build(BuildContext context) {
@@ -166,6 +174,7 @@ class ValueBox extends StatelessWidget {
         align: align,
         maxLines: maxLines,
         controller: controller,
+        formatter: formatter,
       ),
     );
   }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../classes/classes.dart';
 
+FilteringTextInputFormatter numeric = FilteringTextInputFormatter.allow(RegExp("[0-9]"));
+FilteringTextInputFormatter numericPlus = FilteringTextInputFormatter.allow(RegExp("[0-9+-]"));
 
 
 class AttackLine extends StatelessWidget {
@@ -51,6 +53,7 @@ class AttackLine extends StatelessWidget {
           child: TextField(
             controller: attack.bonusController,
             style: TextStyle(fontSize: 12),
+            inputFormatters: [numericPlus],
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               isDense: true,

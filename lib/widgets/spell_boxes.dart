@@ -118,8 +118,10 @@ class SpellSection extends StatelessWidget {
                             children: [
                               Text("SLOTS TOTAL", style: TextStyle(fontSize: 8)),
                               TextField(
+                                controller: spells.slotsTotalController,
                                 textAlignVertical: .center,
                                 style: TextStyle(fontSize: 14),
+                                inputFormatters: [numeric],
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   isDense: true
@@ -133,8 +135,10 @@ class SpellSection extends StatelessWidget {
                             children: [
                               Text("SLOTS EXPENDED", style: TextStyle(fontSize: 8)),
                               TextField(
+                                controller: spells.slotsExpendedController,
                                 textAlignVertical: .center,
                                 style: TextStyle(fontSize: 14),
+                                inputFormatters: [numeric],
                                 decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   isDense: true
