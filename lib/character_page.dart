@@ -173,189 +173,191 @@ class _CharacterPageState extends State<CharacterPage> {
                     child: Column(
                       children: [
           
-                        Row( 
-                          crossAxisAlignment: .start,        // First page 3 columns
-                          children: [
-                    
-                            // First Column
-                            SizedBox(
-                              width: 275,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        child: Column(
-                                          spacing: 15,
-                                          children: [
-                                            AbilityBox(value: "STR", controller: cc.strength.scoreController, modController: cc.strength.modifierController),
-                                            AbilityBox(value: "DEX", controller: cc.dexterity.scoreController, modController: cc.dexterity.modifierController),
-                                            AbilityBox(value: "CON", controller: cc.constitution.scoreController, modController: cc.constitution.modifierController),
-                                            AbilityBox(value: "INT", controller: cc.intelligence.scoreController, modController: cc.intelligence.modifierController),
-                                            AbilityBox(value: "WIS", controller: cc.wisdom.scoreController, modController: cc.wisdom.modifierController),
-                                            AbilityBox(value: "CHA", controller: cc.charisma.scoreController, modController: cc.charisma.modifierController),
-                                          ]
-                                        )
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          children: [
-                                            CardSection(
-                                              child: Column(
-                                                children: [
-                                                  Text(
-                                                    "SAVING THROWS", 
-                                                    style: TextStyle(
-                                                      fontSize: 10,
-                                                      fontWeight: .bold
-                                                    )
-                                                  ),
-                                                  SkillLine(value: "Strength", skill: cc.strSave),
-                                                  SkillLine(value: "Dexterity", skill: cc.dexSave),
-                                                  SkillLine(value: "Constitution", skill: cc.conSave),
-                                                  SkillLine(value: "Intelligence", skill: cc.intSave),
-                                                  SkillLine(value: "Wisdom", skill: cc.wisSave),
-                                                  SkillLine(value: "Charisma", skill: cc.chaSave),
-                                                ]
-                                              )
-                                            ),
-                                            CardSection(
-                                              child: Column(
-                                                children: [
-                                                  Text(
-                                                    "SKILLS", 
-                                                    style: TextStyle(
-                                                      fontSize: 10,
-                                                      fontWeight: .bold
-                                                    )
-                                                  ),
-                                                  SkillLine(value: "Acrobatics (dex)", skill: cc.acrobatics),
-                                                  SkillLine(value: "Animal Handling (wis)", skill: cc.animalHandling),
-                                                  SkillLine(value: "Arcana (int)", skill: cc.arcana),
-                                                  SkillLine(value: "Athletics (str)", skill: cc.athletics),
-                                                  SkillLine(value: "Deception (cha)", skill: cc.deception),
-                                                  SkillLine(value: "History (int)", skill: cc.history),
-                                                  SkillLine(value: "Insight (wis)", skill: cc.insight),
-                                                  SkillLine(value: "Intimidation (cha)", skill: cc.intimidation),
-                                                  SkillLine(value: "Investigation (int)", skill: cc.investigation),
-                                                  SkillLine(value: "Medicine (wis)", skill: cc.medicine),
-                                                  SkillLine(value: "Nature (wis)", skill: cc.nature),
-                                                  SkillLine(value: "Perception (wis)", skill: cc.perception),
-                                                  SkillLine(value: "Performance (cha)", skill: cc.performance),
-                                                  SkillLine(value: "Persuasion (cha)", skill: cc.persuasion),
-                                                  SkillLine(value: "Religion (int)", skill: cc.religion),
-                                                  SkillLine(value: "Sleight of Hand (dex)", skill: cc.sleightOfHand),
-                                                  SkillLine(value: "Stealth (dex)", skill: cc.stealth),
-                                                  SkillLine(value: "Survival (wis)", skill: cc.survival),
-                                                ]
-                                              )
-                                            ),
-                                          ]
-                                        )
-                                      ),
-                                    ]
-                                  ),
-          
-                                  ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true, maxLines: 4, controller: cc.proficiencies.valueController)
-                                ]
-                              )
-                            ),
-                    
-                            // Second Column
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: .start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: .center,
-                                    children: [
-                                      Expanded(child: ValueBox(label: "AC", position: .bottom, align: .center, formatter: numericPlus, controller: cc.ac.valueController)),
-                                      Expanded(child: ValueBox(label: "INITIATIVE", position: .bottom, align: .center, formatter: numericPlus, controller: cc.initiative.valueController)),
-                                      Expanded(child: ValueBox(label: "SPEED", position: .bottom, align: .center, controller: cc.speed.valueController)),
-                                    ],
-                                  ),
-                                  CardSection(
-                                    child: Column(
-                                      spacing: 5,
+                        Card(
+                          child: Row( 
+                            crossAxisAlignment: .start,        // First page 3 columns
+                            children: [
+                                              
+                              // First Column
+                              SizedBox(
+                                width: 275,
+                                child: Column(
+                                  children: [
+                                    Row(
                                       children: [
-                                        Text("HIT POINTS"),
-                                        Row(
-                                          spacing: 10,
-                                          children: [
-                                            Expanded(
-                                              child: LabeledField(label: "MAX", position: .bottom, align: .center, formatter: numeric, controller: cc.hpMax.valueController)
-                                            ),
-                                            Expanded(
-                                              child: LabeledField(label: "CURRENT", position: .bottom, align: .center, formatter: numeric, controller: cc.hpCurr.valueController)
-                                            ),
-                                            Expanded(
-                                              child: LabeledField(label: "TEMP", position: .bottom, align: .center, formatter: numeric, controller: cc.hpTemp.valueController)
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-          
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: CardSection(
+                                        SizedBox(
                                           child: Column(
-                                            spacing: 5,
+                                            spacing: 15,
                                             children: [
-                                              LabeledField(label: "TOTAL", position: .left, size: 10, controller: cc.hitDiceTotal.valueController),
-                                              LabeledField(label: "HIT DICE", position: .bottom, size: 14, align: .center, controller: cc.hitDiceCurr.valueController)
+                                              AbilityBox(value: "STR", controller: cc.strength.scoreController, modController: cc.strength.modifierController),
+                                              AbilityBox(value: "DEX", controller: cc.dexterity.scoreController, modController: cc.dexterity.modifierController),
+                                              AbilityBox(value: "CON", controller: cc.constitution.scoreController, modController: cc.constitution.modifierController),
+                                              AbilityBox(value: "INT", controller: cc.intelligence.scoreController, modController: cc.intelligence.modifierController),
+                                              AbilityBox(value: "WIS", controller: cc.wisdom.scoreController, modController: cc.wisdom.modifierController),
+                                              AbilityBox(value: "CHA", controller: cc.charisma.scoreController, modController: cc.charisma.modifierController),
                                             ]
                                           )
                                         ),
-                                      ),
-                                      SavesBox(saves: cc.savesController),
-                                    ],
-                                  ),
-          
-                                  CardSection(
-                                    child: AttackSection(attacksController: cc.attackSection)
-                                  ),
-          
-                                  CardSection(
-                                    child: Column(
-                                      spacing: 10,
-                                      children: [
-                                        Row(
-                                          spacing: 5,
-                                          children: [
-                                            Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.cp.valueController)),
-                                            Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.sp.valueController)),
-                                            Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.ep.valueController)),
-                                            Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.gp.valueController)),
-                                            Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.pp.valueController)),
-                                          ]
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              CardSection(
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      "SAVING THROWS", 
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight: .bold
+                                                      )
+                                                    ),
+                                                    SkillLine(value: "Strength", skill: cc.strSave),
+                                                    SkillLine(value: "Dexterity", skill: cc.dexSave),
+                                                    SkillLine(value: "Constitution", skill: cc.conSave),
+                                                    SkillLine(value: "Intelligence", skill: cc.intSave),
+                                                    SkillLine(value: "Wisdom", skill: cc.wisSave),
+                                                    SkillLine(value: "Charisma", skill: cc.chaSave),
+                                                  ]
+                                                )
+                                              ),
+                                              CardSection(
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      "SKILLS", 
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight: .bold
+                                                      )
+                                                    ),
+                                                    SkillLine(value: "Acrobatics (dex)", skill: cc.acrobatics),
+                                                    SkillLine(value: "Animal Handling (wis)", skill: cc.animalHandling),
+                                                    SkillLine(value: "Arcana (int)", skill: cc.arcana),
+                                                    SkillLine(value: "Athletics (str)", skill: cc.athletics),
+                                                    SkillLine(value: "Deception (cha)", skill: cc.deception),
+                                                    SkillLine(value: "History (int)", skill: cc.history),
+                                                    SkillLine(value: "Insight (wis)", skill: cc.insight),
+                                                    SkillLine(value: "Intimidation (cha)", skill: cc.intimidation),
+                                                    SkillLine(value: "Investigation (int)", skill: cc.investigation),
+                                                    SkillLine(value: "Medicine (wis)", skill: cc.medicine),
+                                                    SkillLine(value: "Nature (wis)", skill: cc.nature),
+                                                    SkillLine(value: "Perception (wis)", skill: cc.perception),
+                                                    SkillLine(value: "Performance (cha)", skill: cc.performance),
+                                                    SkillLine(value: "Persuasion (cha)", skill: cc.persuasion),
+                                                    SkillLine(value: "Religion (int)", skill: cc.religion),
+                                                    SkillLine(value: "Sleight of Hand (dex)", skill: cc.sleightOfHand),
+                                                    SkillLine(value: "Stealth (dex)", skill: cc.stealth),
+                                                    SkillLine(value: "Survival (wis)", skill: cc.survival),
+                                                  ]
+                                                )
+                                              ),
+                                            ]
+                                          )
                                         ),
-                                        LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24, controller: cc.inventory.valueController)
+                                      ]
+                                    ),
+                                    
+                                    ValueBox(label: "PROFICIENCIES & LANGUAGES", position: .bottom, multiline: true, maxLines: 4, controller: cc.proficiencies.valueController)
+                                  ]
+                                )
+                              ),
+                                              
+                              // Second Column
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: .start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: .center,
+                                      children: [
+                                        Expanded(child: ValueBox(label: "AC", position: .bottom, align: .center, formatter: numericPlus, controller: cc.ac.valueController)),
+                                        Expanded(child: ValueBox(label: "INITIATIVE", position: .bottom, align: .center, formatter: numericPlus, controller: cc.initiative.valueController)),
+                                        Expanded(child: ValueBox(label: "SPEED", position: .bottom, align: .center, controller: cc.speed.valueController)),
                                       ],
-                                    )
-                                  ),
-          
-          
-                                ]
+                                    ),
+                                    CardSection(
+                                      child: Column(
+                                        spacing: 5,
+                                        children: [
+                                          Text("HIT POINTS"),
+                                          Row(
+                                            spacing: 10,
+                                            children: [
+                                              Expanded(
+                                                child: LabeledField(label: "MAX", position: .bottom, align: .center, formatter: numeric, controller: cc.hpMax.valueController)
+                                              ),
+                                              Expanded(
+                                                child: LabeledField(label: "CURRENT", position: .bottom, align: .center, formatter: numeric, controller: cc.hpCurr.valueController)
+                                              ),
+                                              Expanded(
+                                                child: LabeledField(label: "TEMP", position: .bottom, align: .center, formatter: numeric, controller: cc.hpTemp.valueController)
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: CardSection(
+                                            child: Column(
+                                              spacing: 5,
+                                              children: [
+                                                LabeledField(label: "TOTAL", position: .left, size: 10, controller: cc.hitDiceTotal.valueController),
+                                                LabeledField(label: "HIT DICE", position: .bottom, size: 14, align: .center, controller: cc.hitDiceCurr.valueController)
+                                              ]
+                                            )
+                                          ),
+                                        ),
+                                        SavesBox(saves: cc.savesController),
+                                      ],
+                                    ),
+                                    
+                                    CardSection(
+                                      child: AttackSection(attacksController: cc.attackSection)
+                                    ),
+                                    
+                                    CardSection(
+                                      child: Column(
+                                        spacing: 10,
+                                        children: [
+                                          Row(
+                                            spacing: 5,
+                                            children: [
+                                              Expanded(child: LabeledField(label: "CP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.cp.valueController)),
+                                              Expanded(child: LabeledField(label: "SP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.sp.valueController)),
+                                              Expanded(child: LabeledField(label: "EP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.ep.valueController)),
+                                              Expanded(child: LabeledField(label: "GP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.gp.valueController)),
+                                              Expanded(child: LabeledField(label: "PP", position: .top, size: 12, align: .center, formatter: numeric, controller: cc.pp.valueController)),
+                                            ]
+                                          ),
+                                          LabeledField(label: "INVENTORY", position: .bottom, multiline: true, maxLines: 24, controller: cc.inventory.valueController)
+                                        ],
+                                      )
+                                    ),
+                                    
+                                    
+                                  ]
+                                )
+                              ),
+                                              
+                              // Third Column
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: .start,
+                                  children: [
+                                    ValueBox.square(label: "INSPIRATION", position: .right, formatter: numeric, controller: cc.inspiration.valueController),
+                                    ValueBox.square(label: "PROFICIENCY BONUS", position: .right, formatter: numericPlus, controller: cc.proficiencyBonus.profBonusController),
+                                    ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, formatter: numeric, controller: cc.passivePerception.valueController),
+                                    ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraits.valueController),
+                                  ]
+                                )
                               )
-                            ),
-                    
-                            // Third Column
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: .start,
-                                children: [
-                                  ValueBox.square(label: "INSPIRATION", position: .right, formatter: numeric, controller: cc.inspiration.valueController),
-                                  ValueBox.square(label: "PROFICIENCY BONUS", position: .right, formatter: numericPlus, controller: cc.proficiencyBonus.profBonusController),
-                                  ValueBox.square(label: "PASSIVE PERCEPTION", position: .right, formatter: numeric, controller: cc.passivePerception.valueController),
-                                  ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraits.valueController),
-                                ]
-                              )
-                            )
-                          
-                          ]
+                            
+                            ]
+                          ),
                         ),
 
 
@@ -457,51 +459,53 @@ class _CharacterPageState extends State<CharacterPage> {
 
                     
                         // Character Info Section
-                        Row(
-                          crossAxisAlignment: .start,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19, controller: cc.backstory.valueController)
-                                ]
+                        Card(
+                          child: Row(
+                            crossAxisAlignment: .start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19, controller: cc.backstory.valueController)
+                                  ]
+                                ),
                               ),
-                            ),
-          
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  CardSection(
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          spacing: 5,
-                                          children: [
-                                            Expanded(child: LabeledField(label: "AGE", position: .bottom, controller: cc.age.valueController)),
-                                            Expanded(child: LabeledField(label: "HEIGHT", position: .bottom, controller: cc.height.valueController)),
-                                            Expanded(child: LabeledField(label: "WEIGHT", position: .bottom, controller: cc.weight.valueController)),
-                                          ]
-                                        ),
-                                        Row(
-                                          spacing: 5,
-                                          children: [
-                                            Expanded(child: LabeledField(label: "EYES", position: .bottom, controller: cc.eyes.valueController)),
-                                            Expanded(child: LabeledField(label: "SKIN", position: .bottom, controller: cc.skin.valueController)),
-                                            Expanded(child: LabeledField(label: "HAIR", position: .bottom, controller: cc.hair.valueController)),
-                                          ]
-                                        ),
-                                      ]
-                                    )
-                                  ),
-                                  ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true, controller: cc.personalityTraits.valueController),
-                                  ValueBox(label: "IDEALS", position: .bottom, multiline: true, controller: cc.ideals.valueController),
-                                  ValueBox(label: "BONDS", position: .bottom, multiline: true, controller: cc.bonds.valueController),
-                                  ValueBox(label: "FLAWS", position: .bottom, multiline: true, controller: cc.flaws.valueController),
-                                ]
+                                    
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    CardSection(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            spacing: 5,
+                                            children: [
+                                              Expanded(child: LabeledField(label: "AGE", position: .bottom, controller: cc.age.valueController)),
+                                              Expanded(child: LabeledField(label: "HEIGHT", position: .bottom, controller: cc.height.valueController)),
+                                              Expanded(child: LabeledField(label: "WEIGHT", position: .bottom, controller: cc.weight.valueController)),
+                                            ]
+                                          ),
+                                          Row(
+                                            spacing: 5,
+                                            children: [
+                                              Expanded(child: LabeledField(label: "EYES", position: .bottom, controller: cc.eyes.valueController)),
+                                              Expanded(child: LabeledField(label: "SKIN", position: .bottom, controller: cc.skin.valueController)),
+                                              Expanded(child: LabeledField(label: "HAIR", position: .bottom, controller: cc.hair.valueController)),
+                                            ]
+                                          ),
+                                        ]
+                                      )
+                                    ),
+                                    ValueBox(label: "PERSONALITY TRAITS", position: .bottom, multiline: true, controller: cc.personalityTraits.valueController),
+                                    ValueBox(label: "IDEALS", position: .bottom, multiline: true, controller: cc.ideals.valueController),
+                                    ValueBox(label: "BONDS", position: .bottom, multiline: true, controller: cc.bonds.valueController),
+                                    ValueBox(label: "FLAWS", position: .bottom, multiline: true, controller: cc.flaws.valueController),
+                                  ]
+                                ),
                               ),
-                            ),
-          
-                          ]
+                                    
+                            ]
+                          ),
                         ),
           
                         ValueBox(label: "SESSION NOTES", position: .top, multiline: true, maxLines: 4, controller: cc.sessionNotes.valueController)
