@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
-  const minimumSize = Size(765, 100);
+  const minimumSize = Size(765, 250);
 
   WindowOptions windowOptions = const WindowOptions(
     minimumSize: minimumSize
