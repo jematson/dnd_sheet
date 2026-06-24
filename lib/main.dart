@@ -4,12 +4,13 @@ import './character_page.dart';
 import './classes/classes.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_manager/window_manager.dart';
+import 'dart:math';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
-  const minimumSize = Size(765, 250);
+  const minimumSize = Size(765, 400);
 
   WindowOptions windowOptions = const WindowOptions(
     minimumSize: minimumSize
@@ -50,6 +51,8 @@ class _HomePageState extends State<HomePage> {
   List<DNDCharacter> characters = [];
   final characterManager = CharacterManager();
   bool _isLoading = false;
+  
+  final int _splashIndex = Random().nextInt(splashTexts.length);
 
   @override
   void initState() {
@@ -78,12 +81,21 @@ class _HomePageState extends State<HomePage> {
         children: [
           Card(
             child: SizedBox(
-              width: 400,
-              height: 70,
+              height: 90,
               child: Center(
-                child: Text("D&D Characters", 
-                  textAlign: .center,
-                  style: TextStyle(fontSize: 30, fontWeight: .bold)
+                child: Column(
+                  spacing: 10,
+                  mainAxisAlignment: .center,
+                  children: [
+                    Text("D&D Characters", 
+                      textAlign: .center,
+                      style: TextStyle(fontSize: 30, fontWeight: .bold)
+                    ),
+                    Text(splashTexts[_splashIndex],
+                      textAlign: .center,
+                      style: TextStyle(fontStyle: .italic)
+                    )
+                  ],
                 )
               )
             )
@@ -199,3 +211,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+List<String> splashTexts = [
+  "You can press ctrl-s to save your sheet. Obviously.",
+  "Pure Alaskan coding",
+  "Roll for initiative",
+  "Go on, cast Fireball",
+  "Don't forget to tip your DM",
+  "Been there, done that",
+  "When in doubt, Eldritch Blast",
+  "Lukas smells like dead salmon",
+  ":P",
+  ":)",
+  "Never look an Optitherium in the eye.",
+  "Always make direct eye contact with the Optitherium, it's only polite.",
+  "If you give a Warforged a glock...",
+  "Not formally endorsed by the University of Alaska Fairbanks",
+  "Gabriel, you forgot your wallet"
+];
