@@ -218,7 +218,7 @@ class SavesBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardSection(
       child: SizedBox(
-        width: 130,
+        width: 125,
         child: Column(
           children: [
             Text(

@@ -3,8 +3,23 @@ import 'widgets/widgets.dart';
 import './character_page.dart';
 import './classes/classes.dart';
 import 'package:uuid/uuid.dart';
+import 'package:window_manager/window_manager.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+
+  const minimumSize = Size(765, 100);
+
+  WindowOptions windowOptions = const WindowOptions(
+    minimumSize: minimumSize
+  );
+
+  windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+  });
+
   runApp(const MainApp());
 }
 
