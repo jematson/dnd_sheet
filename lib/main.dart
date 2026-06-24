@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                               final result = await Navigator.push(
                                 context,
                                 MaterialPageRoute<void>(
-                                  builder: (context) => CharacterPage(character: characters[index])
+                                  builder: (context) => CharacterPage(character: characters[index], manager: characterManager)
                                 )
                               );
                               final newChar = result as DNDCharacter;
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                     final result = await Navigator.push(
                       context,
                       MaterialPageRoute<void>(
-                        builder: (context) => CharacterPage(character: newCharacter)
+                        builder: (context) => CharacterPage(character: newCharacter, manager: characterManager)
                       )
                     );
                     final newChar = result as DNDCharacter;
