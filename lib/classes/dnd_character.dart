@@ -1,3 +1,11 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-20 14:39
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:39
+ *   Description: Class to define a D&D Character object.
+ */
+
 import './classes.dart';
 import 'package:json_annotation/json_annotation.dart';
 

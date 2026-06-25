@@ -1,3 +1,12 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-18 19:05
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:50
+ *   Description: Widgets for displaying spells on the 
+ *                Character Sheet Page.
+ */
+
 import 'package:flutter/material.dart';
 import './widgets.dart';
 import '../classes/classes.dart';

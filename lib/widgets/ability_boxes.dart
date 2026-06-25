@@ -1,3 +1,12 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-20 12:34
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:50
+ *   Description: Widgets for displaying Ability Scores, Saving 
+ *                Throws, and Skills on the Character Page.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './widgets.dart';

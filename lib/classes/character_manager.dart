@@ -1,3 +1,12 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-22 20:07
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:49
+ *   Description: Class to manage the saving and fetching 
+ *                of D&D Character objects in local JSON files.
+ */
+
 import 'package:dnd_sheet/classes/classes.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:convert';

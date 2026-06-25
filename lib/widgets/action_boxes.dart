@@ -1,3 +1,12 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-19 22:46
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:50
+ *   Description: Widgets for displaying the Attack section 
+ *                on the Character Page.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../classes/classes.dart';

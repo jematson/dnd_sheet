@@ -1,3 +1,11 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-21 11:50
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:39
+ *   Description: Class to define a level of spells object.
+ */
+
 import './classes.dart';
 import 'package:json_annotation/json_annotation.dart';
 

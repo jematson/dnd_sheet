@@ -1,3 +1,11 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-20 18:17
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:58
+ *   Description: Widget for the Character Sheet page.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'widgets/widgets.dart';
@@ -35,6 +43,8 @@ class _CharacterPageState extends State<CharacterPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    // Shortcuts/Actions/FocusScope setup to allow keyboard shortcuts
     return Shortcuts(
       shortcuts: {
         LogicalKeySet(LogicalKeyboardKey.keyS, LogicalKeyboardKey.control): const SaveIntent(),
@@ -55,8 +65,11 @@ class _CharacterPageState extends State<CharacterPage> {
           }),
         },
         child: FocusScope(
+
+          // Main Character Sheet Page Widget
           child: Column(
             children: [
+              
               // Fixed Header
               CardSection(
                 child: Row(
@@ -82,6 +95,7 @@ class _CharacterPageState extends State<CharacterPage> {
                                 ),
                               ),
           
+                              // Save status indicator
                               ValueListenableBuilder(
                                 valueListenable: cc.c, 
                                 builder: (_, char, _) {
@@ -166,25 +180,28 @@ class _CharacterPageState extends State<CharacterPage> {
               ),
           
           
-              // Scrollable Main
+              // Scrollable Main section
               Expanded(
                 child: Center(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-          
+
+                        // First section, equivalent to first page of the classic character sheet
                         Card(
                           child: Row( 
-                            crossAxisAlignment: .start,        // First page 3 columns
+                            crossAxisAlignment: .start,
                             children: [
                                               
-                              // First Column
+                              // Ability Scores / Skills column
                               SizedBox(
                                 width: 275,
                                 child: Column(
                                   children: [
                                     Row(
                                       children: [
+
+                                        // Ability Scores
                                         SizedBox(
                                           child: Column(
                                             spacing: 15,
@@ -198,6 +215,8 @@ class _CharacterPageState extends State<CharacterPage> {
                                             ]
                                           )
                                         ),
+
+                                        // Saving Throws and Skills
                                         Expanded(
                                           child: Column(
                                             children: [
@@ -261,8 +280,9 @@ class _CharacterPageState extends State<CharacterPage> {
                                   ]
                                 )
                               ),
+                                      
                                               
-                              // Second Column
+                              // Middle Column
                               Expanded(
                                 child: Column(
                                   mainAxisAlignment: .start,
@@ -388,6 +408,7 @@ class _CharacterPageState extends State<CharacterPage> {
                                     ),
                                   ),
                           
+
                                   // Spellcasting Header
                                   hasSpells ?
                                   Row(      
@@ -414,6 +435,7 @@ class _CharacterPageState extends State<CharacterPage> {
                                   )
                                   : const SizedBox(),
                                             
+
                                   // Spellcasting Columns
                                   hasSpells ?
                                   Row(
@@ -459,6 +481,7 @@ class _CharacterPageState extends State<CharacterPage> {
 
                     
                         // Character Info Section
+                        
                         Card(
                           child: Row(
                             crossAxisAlignment: .start,

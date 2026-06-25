@@ -1,3 +1,11 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-20 17:55
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:39
+ *   Description: Class to define a D&D spell object.
+ */
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'spell.g.dart';

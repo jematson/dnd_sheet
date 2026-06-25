@@ -1,3 +1,11 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-15 18:17
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:52
+ *   Description: Main app and Home Page widget for the D&D Sheets app.
+ */
+
 import 'package:flutter/material.dart';
 import 'widgets/widgets.dart';
 import './character_page.dart';
@@ -8,6 +16,9 @@ import 'dart:math';
 
 String appName = "D&D Sheets";
 String appVersion = "1.0";
+
+
+// Main App
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,6 +93,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: [
+
+          // Home Page title header
           Card(
             child: SizedBox(
               height: 90,
@@ -104,6 +117,8 @@ class _HomePageState extends State<HomePage> {
             )
           ),
       
+      
+          // Scrolling list of D&D Characters
           Expanded(
             child: Center(
               child: _isLoading ?
@@ -180,6 +195,8 @@ class _HomePageState extends State<HomePage> {
             )
           ),
       
+
+          // Home page footer
           Card(
             child: SizedBox(
               width: 600,
@@ -209,6 +226,8 @@ class _HomePageState extends State<HomePage> {
               )
             )
           ),
+
+          // About/Licenses button
           Align(
             alignment: .centerRight,
             child: TextButton(

@@ -1,5 +1,14 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-20 22:37
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:49
+ *   Description: Controller class to manage the updating of a 
+ *                DNDCharacter object from user activity on the 
+ *                Character Sheet page.
+ */
+
 import 'package:flutter/material.dart';
-//import 'package:flutter/src/foundation/change_notifier.dart';
 import './classes.dart';
 
 

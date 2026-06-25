@@ -1,3 +1,12 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-22 17:05
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:49
+ *   Description: Controller classes for various widgets on 
+ *                the Character Sheet page.
+ */
+
 import 'package:flutter/material.dart';
 import './classes.dart';
 

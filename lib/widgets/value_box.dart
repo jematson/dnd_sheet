@@ -1,3 +1,12 @@
+/*
+ *   Author: Jenae Matson
+ *   Create Time: 2026-06-15 18:29
+ *   Modified by: Jenae Matson
+ *   Modified time: 2026-06-24 17:50
+ *   Description: Widgets for labeled entry boxes for values on the 
+ *                Character Sheet page.
+ */
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../classes/classes.dart';
