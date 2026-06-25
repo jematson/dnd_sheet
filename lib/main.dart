@@ -6,6 +6,9 @@ import 'package:uuid/uuid.dart';
 import 'package:window_manager/window_manager.dart';
 import 'dart:math';
 
+String appName = "D&D Sheets";
+String appVersion = "1.0";
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
@@ -206,6 +209,20 @@ class _HomePageState extends State<HomePage> {
               )
             )
           ),
+          Align(
+            alignment: .centerRight,
+            child: TextButton(
+              child: Text("© 2026 Jenae Matson", style: TextStyle(fontSize: 10)),
+              onPressed: () {
+                showLicensePage(
+                  context: context,
+                  applicationName: appName,
+                  applicationVersion: appVersion,
+                  applicationLegalese: "© 2026 Jenae Matson\ngithub.com/jematson/dnd_sheet\nLicensed under the MIT License."
+                );
+              },
+            )
+          )
         ]
       ),
     );
