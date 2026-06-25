@@ -2,23 +2,30 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-22 20:07
  *   Modified by: Jenae Matson
- *   Modified time: 2026-06-24 17:49
+ *   Modified time: 2026-06-25 12:04
  *   Description: Class to manage the saving and fetching 
  *                of D&D Character objects in local JSON files.
  */
 
 import 'package:dnd_sheet/classes/classes.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 
 class CharacterManager {
 
+  bool get isDebugMode {
+    return kDebugMode;
+  }
+
   Future<Directory> get _charactersPath async {
     final directory = await getApplicationDocumentsDirectory();
 
-    final characterDirectory = Directory('${directory.path}/D&DSheets/characters');
+    final characterDirectory = isDebugMode 
+          ? Directory('${directory.path}/D&DSheets/testing_characters')
+          : Directory('${directory.path}/D&DSheets/characters');
 
     if (!await characterDirectory.exists()) {
       await characterDirectory.create(recursive: true);
