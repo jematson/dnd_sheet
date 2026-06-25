@@ -1,3 +1,25 @@
-# dnd_sheet
+# D&D Sheets
 
-A new Flutter project.
+A Dungeons & Dragons Character Sheet App
+
+### Home Page
+![D&D Sheets App Home Page](/images/homepage.png)
+
+### Character Sheet
+![D&D Sheets App Character Sheet Page](/images/charsheet.png)
+
+## Installation
+Visit the Releases tab to the right to download the executable.
+
+## About the App
+D&DSheets is a simple desktop program for creating character sheets for Dungeons&Dragon 5e. The page layout is based on the classic character sheet from the Player's Handbook. 
+
+### Automatic Modifiers
+Ability, saving throw, and skill modifiers are all automatically calculated based on the entered ability scores and proficiencies. Proficiency bonus is also automatically filled in based on level.
+
+### Local Storage
+The data for each character is stored locally in JSON files. These files can be found in the `D&DSheets/characters` folder in your local Documents folder. 
+
+Each file has a uniquely generated id for the filename. This can be changed by editing the `fileID` value in the file.
+
+When a character is deleted from the home screen, the file remains in that folder. To restore the character to the app, change the value of `archived` to `true` in the file.
