@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-20 18:17
  *   Modified by: Jenae Matson
- *   Modified time: 2026-06-24 17:58
+ *   Modified time: 2026-07-14 18:27
  *   Description: Widget for the Character Sheet page.
  */
 
@@ -374,11 +374,13 @@ class _CharacterPageState extends State<CharacterPage> {
                                     ValueBox(label: "FEATURES & TRAITS", position: .bottom, multiline: true, maxLines: 30, controller: cc.featuresTraits.valueController),
                                   ]
                                 )
-                              )
+                              ),
                             
                             ]
                           ),
                         ),
+                        
+                        ValueBox(label: "FEATURES", position: .bottom, multiline: true, maxLines: 3, controller: cc.features.valueController),
 
 
                         // SPELLCASTING SECTION

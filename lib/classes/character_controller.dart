@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-20 22:37
  *   Modified by: Jenae Matson
- *   Modified time: 2026-06-24 17:49
+ *   Modified time: 2026-07-14 18:22
  *   Description: Controller class to manage the updating of a 
  *                DNDCharacter object from user activity on the 
  *                Character Sheet page.
@@ -192,6 +192,7 @@ class CharacterController {
 
   late ValueController proficiencies = ValueController(initialValue: c.value.proficiencies, update: (v){c.value.proficiencies = v.valueController.text; c.notifyListeners();});
   late ValueController featuresTraits = ValueController(initialValue: c.value.featuresTraits, update: (v){c.value.featuresTraits = v.valueController.text; c.notifyListeners();});
+  late ValueController features = ValueController(initialValue: c.value.features, update: (v){c.value.features = v.valueController.text; c.notifyListeners();});
 
   late ValueController spellcastingClass = ValueController(initialValue: c.value.spellcastingClass, update: (v){c.value.spellcastingClass = v.valueController.text; c.notifyListeners();});
   late ValueController spellcastingAbility = ValueController(initialValue: c.value.spellcastingAbility, update: (v){c.value.spellcastingAbility = v.valueController.text; c.notifyListeners();});
@@ -345,6 +346,7 @@ class CharacterController {
     
     proficiencies.dispose();
     featuresTraits.dispose();
+    features.dispose();
     
     spellcastingAbility.dispose();
     spellcastingClass.dispose();

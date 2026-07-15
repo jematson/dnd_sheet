@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-20 14:39
  *   Modified by: Jenae Matson
- *   Modified time: 2026-06-24 17:39
+ *   Modified time: 2026-07-14 18:22
  *   Description: Class to define a D&D Character object.
  */
 
@@ -72,6 +72,7 @@ class DNDCharacter {
 
   String proficiencies;
   String featuresTraits;
+  String features;
 
   String armorClass;
   String initiative;
@@ -191,6 +192,7 @@ class DNDCharacter {
     this.initiative = "",
     this.proficiencies = "",
     this.featuresTraits = "",
+    this.features = "",
     this.speed = "",
     this.hpCurr = "",
     this.hpMax = "",
