@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-15 18:17
  *   Modified by: Jenae Matson
- *   Modified time: 2026-06-24 17:52
+ *   Modified time: 2026-07-14 18:08
  *   Description: Main app and Home Page widget for the D&D Sheets app.
  */
 
@@ -66,7 +66,6 @@ class _HomePageState extends State<HomePage> {
   final characterManager = CharacterManager();
   bool _isLoading = false;
   
-  final int _splashIndex = Random().nextInt(splashTexts.length);
 
   @override
   void initState() {
@@ -107,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: .center,
                       style: TextStyle(fontSize: 30, fontWeight: .bold)
                     ),
-                    Text(splashTexts[_splashIndex],
+                    Text(splashTexts[Random().nextInt(splashTexts.length)],
                       textAlign: .center,
                       style: TextStyle(fontStyle: .italic)
                     )
