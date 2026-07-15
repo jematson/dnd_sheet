@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-22 20:07
  *   Modified by: Jenae Matson
- *   Modified time: 2026-06-25 12:04
+ *   Modified time: 2026-07-14 21:32
  *   Description: Class to manage the saving and fetching 
  *                of D&D Character objects in local JSON files.
  */
@@ -34,6 +34,31 @@ class CharacterManager {
     return characterDirectory;
   }
 
+  Future<Directory> get _portraitsPath async {
+    final directory = await getApplicationDocumentsDirectory();
+
+    final imgDirectory = Directory('${directory.path}/D&DSheets/characterPortraits');
+
+    if (!await imgDirectory.exists()) {
+      await imgDirectory.create(recursive: true);
+    }
+
+    return imgDirectory;
+  }
+
+
+  Future<File> _characterFileReference(String id) async {
+    final dir = await _charactersPath;
+    final path = dir.path;
+    return File('$path/$id.json');
+  }
+
+  Future<File> loadPortrait(String id) async {
+    final dir = await _portraitsPath;
+    final path = dir.path;
+    return File('$path/$id.png');
+  }
+
 
   Future<List<DNDCharacter>> loadCharacters() async {
     final dir = await _charactersPath;
@@ -57,13 +82,10 @@ class CharacterManager {
     return characters;
   }
 
-
-  Future<File> _characterFileReference(String id) async {
-    final dir = await _charactersPath;
-    final path = dir.path;
-    return File('$path/$id.json');
+  Future<void> savePortrait(File img, String charId) async {
+    final fileRef = await loadPortrait(charId);
+    await img.copy(fileRef.path);
   }
-
 
   Future<void> saveCharacter(DNDCharacter character) async {
     final fileRef = await _characterFileReference(character.fileID);

@@ -2,12 +2,14 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-20 18:17
  *   Modified by: Jenae Matson
- *   Modified time: 2026-07-14 18:27
+ *   Modified time: 2026-07-14 22:00
  *   Description: Widget for the Character Sheet page.
  */
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:file_picker/file_picker.dart';
 import 'widgets/widgets.dart';
 import 'classes/classes.dart';
 
@@ -31,6 +33,7 @@ class _CharacterPageState extends State<CharacterPage> {
   late CharacterManager manager;
   bool _isSaving = false;
   late final ValueNotifier<bool> _hasSpellcasting = ValueNotifier(character.showSpellcasting);
+  ValueNotifier<File?> portrait = ValueNotifier(null);
 
   @override
   void initState() {
@@ -38,6 +41,17 @@ class _CharacterPageState extends State<CharacterPage> {
     manager = widget.manager;
     character = widget.character;
     cc = CharacterController(original: character);
+
+    manager.loadPortrait(character.fileID)
+      .then((result) async {
+        if (await result.exists()) {
+          await FileImage(result).evict();
+          portrait.value = result;
+        } else {
+          portrait.value = null;
+        }
+      }
+    );
   }
 
 
@@ -491,7 +505,7 @@ class _CharacterPageState extends State<CharacterPage> {
                               Expanded(
                                 child: Column(
                                   children: [
-                                    ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 19, controller: cc.backstory.valueController)
+                                    ValueBox(label: "BACKSTORY", position: .top, multiline: true, maxLines: 33, controller: cc.backstory.valueController)
                                   ]
                                 ),
                               ),
@@ -499,6 +513,36 @@ class _CharacterPageState extends State<CharacterPage> {
                               Expanded(
                                 child: Column(
                                   children: [
+
+                                    // Character Portrait
+                                    CardSection(
+                                      child: ValueListenableBuilder(
+                                        valueListenable: portrait, 
+                                        builder: (_, img, _) {
+                                          return IconButton(
+                                            iconSize: 300,
+                                            icon: portrait.value == null
+                                            ? Icon(Icons.add)
+                                            : Image.file(portrait.value!),
+
+                                            onPressed: () async {
+                                              FilePickerResult? result = await FilePicker.pickFiles(
+                                                allowedExtensions: ['jpg', 'png', 'jpeg']
+                                              );
+
+                                              if (result != null) {
+                                                final file = File(result.files.single.path!);
+                                                
+                                                await manager.savePortrait(file, character.fileID);
+                                                portrait.value = file;
+                                              }
+                                            }
+                                          );
+                                        }
+                                      )
+                                    ),
+
+                                    // Character Information
                                     CardSection(
                                       child: Column(
                                         children: [
