@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-15 18:17
  *   Modified by: Jenae Matson
- *   Modified time: 2026-07-15 20:05
+ *   Modified time: 2026-07-15 20:34
  *   Description: Main app and Home Page widget for the D&D Sheets app.
  */
 
@@ -249,6 +249,7 @@ class _HomePageState extends State<HomePage> {
 
 
 List<String> splashTexts = [
+  "Got suggestions? Let me know on GitHub!"
   "You can press ctrl-s to save your sheet. Obviously.",
   "Pure Alaskan coding",
   "Roll for initiative",
