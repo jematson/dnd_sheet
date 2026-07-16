@@ -2,8 +2,8 @@ name: D&D Sheets Desktop Deployment
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: d&d-sheets-${{github.ref_name}}-linux.zip
+          filename: dnd-sheets-${{github.ref_name}}-linux.zip
           directory: build/linux/x64/release/bundle
       - name: Release to github
         uses: softprops/action-gh-release@v1
@@ -39,7 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{github.ref_name}}
-          files: build/linux/x64/release/bundle/d&d-sheets-${{github.ref_name}}-linux.zip
+          files: build/linux/x64/release/bundle/dnd-sheets-${{github.ref_name}}-linux.zip
 
   windows:
     runs-on: windows-latest
@@ -61,15 +61,15 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: d&d-sheets-${{github.ref_name}}-windows.zip
-          directory: build/windows/runner/Release
+          filename: dnd-sheets-${{github.ref_name}}-windows.zip
+          directory: build/windows/x64/runner/Release
       - name: Release to github
         uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{github.ref_name}}
-          files: build/windows/runner/Release/d&d-sheets-${{github.ref_name}}-windows.zip
+          files: build/windows/runner/Release/dnd-sheets-${{github.ref_name}}-windows.zip
 
   macos:
     runs-on: macos-latest
@@ -91,7 +91,7 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          filename: d&d-sheets-${{github.ref_name}}-macos.zip
+          filename: dnd-sheets-${{github.ref_name}}-macos.zip
           directory: build/macos/Build/Products/Release
       - name: Release to github
         uses: softprops/action-gh-release@v1
@@ -99,4 +99,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{github.ref_name}}
-          files: build/macos/Build/Products/Release/d&d-sheets-${{github.ref_name}}-macos.zip
+          name: D&D Sheets ${{github.ref_name}}
+          body_path: RELEASE_NOTES.md
+          files: build/macos/Build/Products/Release/dnd-sheets-${{github.ref_name}}-macos.zip
