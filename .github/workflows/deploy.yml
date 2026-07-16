@@ -69,7 +69,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{github.ref_name}}
-          files: build/windows/runner/Release/dnd-sheets-${{github.ref_name}}-windows.zip
+          files: build/windows/x64/runner/Release/dnd-sheets-${{github.ref_name}}-windows.zip
 
   macos:
     runs-on: macos-latest
