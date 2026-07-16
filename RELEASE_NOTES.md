@@ -6,3 +6,5 @@ This version adds a few new features:
 - Splash text updates more often
 
 As well as Linux and Mac version!
+
++ Added an icon image for Mac
