@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-15 18:17
  *   Modified by: Jenae Matson
- *   Modified time: 2026-07-15 19:48
+ *   Modified time: 2026-07-15 20:05
  *   Description: Main app and Home Page widget for the D&D Sheets app.
  */
 
