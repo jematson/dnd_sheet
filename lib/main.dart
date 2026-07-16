@@ -2,7 +2,7 @@
  *   Author: Jenae Matson
  *   Create Time: 2026-06-15 18:17
  *   Modified by: Jenae Matson
- *   Modified time: 2026-07-14 18:08
+ *   Modified time: 2026-07-15 19:48
  *   Description: Main app and Home Page widget for the D&D Sheets app.
  */
 
@@ -15,7 +15,7 @@ import 'package:window_manager/window_manager.dart';
 import 'dart:math';
 
 String appName = "D&D Sheets";
-String appVersion = "1.0";
+String appVersion = "2.0";
 
 
 // Main App
